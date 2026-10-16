@@ -2,6 +2,10 @@
 
 Aplicación de lienzo (Canvas App) de Power Apps para gestionar el ciclo de vida de proyectos de agua potable y saneamiento básico: desde la solicitud ciudadana hasta su viabilidad, priorización y seguimiento por fases.
 
+![Módulo de Solicitudes](img/solicitudes.png)
+
+*Módulo de Solicitudes: indicadores por estado, búsqueda por radicado y listado con semáforo de vencimiento (datos personales difuminados).*
+
 ## Módulos
 
 | Módulo | Pantallas | Qué hace |
