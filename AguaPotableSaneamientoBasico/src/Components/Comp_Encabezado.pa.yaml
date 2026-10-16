@@ -1,0 +1,148 @@
+# ************************************************************************************************
+# Warning: YAML source code for Canvas Apps should only be used to review changes made within Power Apps Studio and for minor edits (Preview).
+# Use the maker portal to create and edit your Power Apps.
+# 
+# The schema file for Canvas Apps is available at https://go.microsoft.com/fwlink/?linkid=2304907
+# 
+# For more information, visit https://go.microsoft.com/fwlink/?linkid=2292623
+# ************************************************************************************************
+ComponentDefinitions:
+  Comp_Encabezado:
+    DefinitionType: CanvasComponent
+    CustomProperties:
+      PestañaActiva:
+        PropertyKind: Input
+        DisplayName: PestañaActiva
+        Description: Propiedad personalizada
+        DataType: Text
+        Default: ="Texto"
+    Properties:
+      Height: =60
+      Width: =App.Width
+    Children:
+      - RectHeader:
+          Control: Rectangle@2.3.0
+          Properties:
+            BorderColor: =RGBA(0, 18, 107, 1)
+            Fill: =ColorValue("#1a3a5c")
+            Height: =64
+            Width: =Parent.Width
+      - LblIniciales:
+          Control: Classic/Button@2.2.0
+          Properties:
+            BorderColor: =ColorFade(Self.Fill, -15%)
+            BorderThickness: =0
+            Color: =Color.White
+            DisabledBorderColor: =RGBA(166, 166, 166, 1)
+            Fill: =ColorValue("#2e6da4")
+            Font: =Font.'Open Sans'
+            Height: =38
+            HoverBorderColor: =ColorFade(Self.BorderColor, 20%)
+            HoverColor: =RGBA(255, 255, 255, 1)
+            HoverFill: =ColorValue("#2e6da4")
+            PressedBorderColor: =Self.Fill
+            PressedColor: =Self.Fill
+            PressedFill: =Self.Color
+            RadiusBottomLeft: =18
+            RadiusBottomRight: =18
+            RadiusTopLeft: =18
+            RadiusTopRight: =18
+            Size: =12
+            Text: =Left(User().FullName,1) & Mid(User().FullName, Find(" ",User().FullName)+1,1)
+            Width: =38
+            X: =Parent.Width - 46
+            Y: =14
+      - LblUsuario:
+          Control: Label@2.5.1
+          Properties:
+            Align: =Align.Right
+            BorderColor: =RGBA(0, 18, 107, 1)
+            Color: =Color.White
+            Font: =Font.'Open Sans'
+            Height: =25
+            Size: |-
+              =If(
+                  Len(User().FullName) > 40,
+                  7,
+                  Len(User().FullName) > 30,
+                  8,
+                  Len(User().FullName) > 25,
+                  9,
+                  10
+              )
+            Text: =User().FullName
+            Width: =500
+            Wrap: =false
+            X: =Parent.Width - Self.Width - 55
+            Y: =10
+      - LblSubtitulo:
+          Control: Label@2.5.1
+          Properties:
+            BorderColor: =RGBA(0, 18, 107, 1)
+            Color: =ColorValue("#7aa8c7")
+            Font: =Font.'Open Sans'
+            Height: =20
+            Size: =9
+            Text: ="Alcaldía de Medellín · Distrito de Ciencia, Tecnología e Innovación"
+            Width: =424
+            X: =LblTitulo.X
+            Y: =42
+      - LblTitulo:
+          Control: Label@2.5.1
+          Properties:
+            BorderColor: =RGBA(0, 18, 107, 1)
+            Color: =Color.White
+            Font: =Font.'Open Sans'
+            FontWeight: =FontWeight.Bold
+            Height: =44
+            Text: ="Agua Potable y Saneamiento Básico"
+            Width: =519
+            X: =56
+      - FonLogo:
+          Control: Classic/Button@2.2.0
+          Properties:
+            BorderColor: =ColorFade(Self.Fill, -15%)
+            BorderThickness: =0
+            Color: =RGBA(255, 255, 255, 1)
+            DisabledBorderColor: =RGBA(166, 166, 166, 1)
+            Fill: =ColorValue("#c8a84b")
+            Font: =Font.'Open Sans'
+            Height: =38
+            HoverBorderColor: =ColorFade(Self.BorderColor, 20%)
+            HoverColor: =RGBA(255, 255, 255, 1)
+            HoverFill: =ColorFade(RGBA(56, 96, 178, 1), -20%)
+            PressedBorderColor: =Self.Fill
+            PressedColor: =Self.Fill
+            PressedFill: =Self.Color
+            RadiusBottomLeft: =6
+            RadiusBottomRight: =6
+            RadiusTopLeft: =6
+            RadiusTopRight: =6
+            Text: =""
+            Width: =38
+            X: =12
+            Y: =13
+      - ImgLogo:
+          Control: Image@2.2.3
+          Properties:
+            BorderColor: =RGBA(0, 18, 107, 1)
+            Fill: =Color.Transparent
+            Height: =40
+            Image: =logomini
+            ImagePosition: =ImagePosition.Center
+            Width: =40
+            X: =11
+            Y: =13
+      - LblEmail:
+          Control: Label@2.5.1
+          Properties:
+            Align: =Align.Right
+            BorderColor: =RGBA(0, 18, 107, 1)
+            Color: =ColorValue("#7aa8c7")
+            Font: =Font.'Open Sans'
+            Height: =20
+            Size: =9
+            Text: =User().Email
+            Width: =265
+            X: =Parent.Width - Self.Width - 55
+            Y: =40

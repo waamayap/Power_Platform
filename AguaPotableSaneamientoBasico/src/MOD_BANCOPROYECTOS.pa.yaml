@@ -1,0 +1,1622 @@
+# ************************************************************************************************
+# Warning: YAML source code for Canvas Apps should only be used to review changes made within Power Apps Studio and for minor edits (Preview).
+# Use the maker portal to create and edit your Power Apps.
+# 
+# The schema file for Canvas Apps is available at https://go.microsoft.com/fwlink/?linkid=2304907
+# 
+# For more information, visit https://go.microsoft.com/fwlink/?linkid=2292623
+# ************************************************************************************************
+Screens:
+  MOD_BANCOPROYECTOS:
+    Properties:
+      LoadingSpinnerColor: =RGBA(56, 96, 178, 1)
+      OnVisible: =Set(varPestañaActiva, "BancoProyectos")
+    Children:
+      - MainContainerPri:
+          Control: GroupContainer@1.5.0
+          Variant: AutoLayout
+          Properties:
+            Fill: =Color.White
+            Height: =500
+            LayoutAlignItems: =LayoutAlignItems.Center
+            LayoutDirection: =LayoutDirection.Vertical
+            PaddingBottom: =8
+            PaddingLeft: =8
+            PaddingRight: =8
+            PaddingTop: =8
+            Width: =1136
+            Y: =108
+          Children:
+            - ContainerPri:
+                Control: GroupContainer@1.5.0
+                Variant: ManualLayout
+                Properties:
+                  FillPortions: =0
+                  Height: =34
+                  LayoutMinWidth: =34
+                  X: =40
+                  Y: =40
+                Children:
+                  - Icon7:
+                      Control: Classic/Icon@2.5.0
+                      Properties:
+                        BorderColor: =RGBA(0, 18, 107, 1)
+                        Color: =RGBA(0, 18, 107, 1)
+                        Height: =34
+                        Icon: =Icon.Add
+                        OnSelect: |-
+                          =ResetForm(FormDatosGeneralesPri);
+                          ResetForm(FormComponenteTecnico);
+                          ResetForm(FormPriComponenteJuridico);
+                          ResetForm(FormPriComponenteAmbiental);
+                          ResetForm(FormPriComponenteAdministrativo);
+                          Set(
+                              varFormDataPri,
+                              Defaults(BancoProyectos)
+                          );
+                          Set(
+                              varFormMode2,
+                              FormMode.Edit
+                          );
+                          Navigate('Pri-GeneralesPriorizacion'
+                          )
+                        X: =1056
+                  - DropdownCampoPri:
+                      Control: Classic/DropDown@2.3.1
+                      Properties:
+                        BorderColor: =RGBA(0, 18, 107, 1)
+                        ChevronBackground: =ColorValue("#1a3a5c")
+                        ChevronFill: =RGBA(255, 255, 255, 1)
+                        ChevronHoverBackground: =ColorFade(RGBA(56, 96, 178, 1), -20%)
+                        ChevronHoverFill: =RGBA(255, 255, 255, 1)
+                        Default: ="Numero de Radicado Entrada"
+                        Font: =Font.'Open Sans'
+                        Height: =34
+                        HoverFill: =RGBA(186, 202, 226, 1)
+                        Items: =["Numero radicado entrada", "Priorizado Por", "Concepto final"]
+                        Items.Value: =Value
+                        PressedColor: =RGBA(255, 255, 255, 1)
+                        PressedFill: =RGBA(0, 18, 107, 1)
+                        SelectionColor: =RGBA(255, 255, 255, 1)
+                        SelectionFill: =RGBA(56, 96, 178, 1)
+                        Size: =11.83
+                        Width: =281
+                  - TextInputPri:
+                      Control: Classic/TextInput@2.3.2
+                      Properties:
+                        BorderColor: =RGBA(0, 18, 107, 1)
+                        Default: =
+                        Font: =Font.'Open Sans'
+                        Height: =34
+                        HoverBorderColor: =RGBA(0, 18, 107, 1)
+                        HoverFill: =RGBA(186, 202, 226, 1)
+                        Size: =11.83
+                        Width: =207
+                        X: =281
+            - ContenedorScrollPri:
+                Control: GroupContainer@1.5.0
+                Variant: ManualLayout
+                Properties:
+                  Fill: =Color.White
+                  Height: =150
+                  LayoutMinHeight: =16
+                  LayoutMinWidth: =16
+                Children:
+                  - Container6_1:
+                      Control: GroupContainer@1.5.0
+                      Variant: AutoLayout
+                      Properties:
+                        DropShadow: =DropShadow.None
+                        Fill: =RGBA(242, 242, 242, 1)
+                        Height: =461
+                        LayoutAlignItems: =LayoutAlignItems.Center
+                        LayoutDirection: =LayoutDirection.Vertical
+                        Width: =1120
+                        Y: =40
+                      Children:
+                        - GalleryPri:
+                            Control: Gallery@2.15.0
+                            Variant: Vertical
+                            Properties:
+                              BorderColor: =RGBA(245, 245, 245, 1)
+                              DisplayMode: =
+                              Fill: =Color.White
+                              Height: =Container6_1.Height
+                              Items: |-
+                                =SortByColumns(
+                                    Filter(
+                                        BancoProyectos,
+                                        IsBlank(TextInputPri.Text) ||
+                                        Switch(
+                                            DropdownCampoPri.Selected.Value,
+                                            "Numero radicado entrada", StartsWith(Coalesce('Numero radicado entrada', ""), TextInputPri.Text),
+                                            "Priorizado Por", StartsWith(Coalesce('Priorizado por', ""), TextInputPri.Text),
+                                            "Concepto final", StartsWith(Coalesce('Concepto final'.Value, ""), TextInputPri.Text),
+                                            true
+                                        )
+                                    ),
+                                    "field_2",
+                                    SortOrder.Descending
+                                )
+                              LayoutMinHeight: =16
+                              LayoutMinWidth: =16
+                              TemplatePadding: =0
+                              TemplateSize: =35
+                              Width: =Container6_1.Width
+                            Children:
+                              - txtobservacionestecnicas:
+                                  Control: ModernTextInput@1.1.1
+                                  Properties:
+                                    Align: =Align.Center
+                                    Default: "=ThisItem.'Observaciones técnicas'\n "
+                                    Fill: =Color.White
+                                    Height: =35
+                                    Placeholder: =""
+                                    Size: =14
+                                    Width: =headerConceptofinal.Width
+                                    X: =headerConceptofinal.X
+                              - txtconceptofinal:
+                                  Control: ModernTextInput@1.1.1
+                                  Properties:
+                                    Align: =Align.Center
+                                    Default: "=ThisItem.'Concepto final'.Value\n "
+                                    Fill: =Color.White
+                                    Height: =35
+                                    Placeholder: =""
+                                    Size: =14
+                                    Width: =headerConceptofinal.Width
+                                    X: =headerConceptofinal.X
+                              - txtresultadoevaluacioncriterios:
+                                  Control: ModernTextInput@1.1.1
+                                  Properties:
+                                    Align: =Align.Center
+                                    Default: |-
+                                      =Text(
+                                          Value(ThisItem.'Resultado de evaluación de criterios (%)', "en-US") * 100,
+                                          "[$-es-ES]0,00"
+                                      ) & " %"
+                                    Fill: =Color.White
+                                    Height: =35
+                                    Placeholder: =""
+                                    Size: =14
+                                    Width: =headerResultadoEvaluacionCriterios.Width
+                                    X: =headerResultadoEvaluacionCriterios.X
+                              - txtpuntajecostobeneficio:
+                                  Control: ModernTextInput@1.1.1
+                                  Properties:
+                                    Align: =Align.Center
+                                    Default: |-
+                                      =Text(
+                                          Value(ThisItem.'Puntaje costo beneficio', "en-US") * 100,
+                                          "[$-es-ES]0,00"
+                                      ) & " %"
+                                    Fill: =Color.White
+                                    Height: =35
+                                    Placeholder: =""
+                                    Size: =14
+                                    Width: =headerPuntajecostobeneficio.Width
+                                    X: =headerPuntajecostobeneficio.X
+                              - txtcostobeneficios:
+                                  Control: ModernTextInput@1.1.1
+                                  Properties:
+                                    Align: =Align.Center
+                                    Default: "=ThisItem.'Costo/Beneficio'.Value\n "
+                                    Fill: =Color.White
+                                    Height: =35
+                                    Placeholder: =""
+                                    Size: =14
+                                    Width: =headerCostobeneficio.Width
+                                    X: =headerCostobeneficio.X
+                              - txtpuntajecoberturaviviendas:
+                                  Control: ModernTextInput@1.1.1
+                                  Properties:
+                                    Align: =Align.Center
+                                    Default: |-
+                                      =Text(
+                                          Value(ThisItem.'Puntaje cobertura viviendas', "en-US") * 100,
+                                          "[$-es-ES]0,00"
+                                      ) & " %"
+                                    Fill: =Color.White
+                                    Height: =35
+                                    Placeholder: =""
+                                    Size: =14
+                                    Width: =headerPuntajecoberturaviviendas.Width
+                                    X: =headerPuntajecoberturaviviendas.X
+                              - txtcoberturaviviendadbeneficiar:
+                                  Control: ModernTextInput@1.1.1
+                                  Properties:
+                                    Align: =Align.Center
+                                    Default: "=ThisItem.'Cobertura viviendas a beneficiar'.Value\n "
+                                    Fill: =Color.White
+                                    Height: =35
+                                    Placeholder: =""
+                                    Size: =14
+                                    Width: =headerCoberturaviviandasbeneficiar.Width
+                                    X: =headerCoberturaviviandasbeneficiar.X
+                              - txtpuntajeparticipacionciudadana:
+                                  Control: ModernTextInput@1.1.1
+                                  Properties:
+                                    Align: =Align.Center
+                                    Default: |-
+                                      =Text(
+                                          Value(ThisItem.'Puntaje participación ciudadana', "en-US") * 100,
+                                          "[$-es-ES]0,00"
+                                      ) & " %"
+                                    Fill: =Color.White
+                                    Height: =35
+                                    Placeholder: =""
+                                    Size: =14
+                                    Width: =headerPuntajeparticipacionciudadana.Width
+                                    X: =headerPuntajeparticipacionciudadana.X
+                              - txtparticipacionciudadana:
+                                  Control: ModernTextInput@1.1.1
+                                  Properties:
+                                    Align: =Align.Center
+                                    Default: "=ThisItem.'Participación ciudadana y legitimidad social'.Value\n "
+                                    Fill: =Color.White
+                                    Height: =35
+                                    Placeholder: =""
+                                    Size: =14
+                                    Width: =headerParticipaciónCiudadanaLegitimidadSocial.Width
+                                    X: =headerParticipaciónCiudadanaLegitimidadSocial.X
+                              - txtpuntajeimpactocostos:
+                                  Control: ModernTextInput@1.1.1
+                                  Properties:
+                                    Align: =Align.Center
+                                    Default: |-
+                                      =Text(
+                                          Value(ThisItem.'Puntaje impacto en costos', "en-US") * 100,
+                                          "[$-es-ES]0,00"
+                                      ) & " %"
+                                    Fill: =Color.White
+                                    Height: =35
+                                    Placeholder: =""
+                                    Size: =14
+                                    Width: =headerPuntajeimpactocostos.Width
+                                    X: =headerPuntajeimpactocostos.X
+                              - txtimpactocostosdeprestacion:
+                                  Control: ModernTextInput@1.1.1
+                                  Properties:
+                                    Align: =Align.Center
+                                    Default: "=ThisItem.'Impacto en costos de prestación'.Value\n "
+                                    Fill: =Color.White
+                                    Height: =35
+                                    Placeholder: =""
+                                    Size: =14
+                                    Width: =headerImpactocostosdeprestacion.Width
+                                    X: =headerImpactocostosdeprestacion.X
+                              - txttramitesambientalesgestionar:
+                                  Control: ModernTextInput@1.1.1
+                                  Properties:
+                                    Align: =Align.Center
+                                    Default: |-
+                                      =Concat(
+                                          ThisItem.'Trámites ambientales por gestionar',
+                                          Value,
+                                          ", "
+                                      )
+                                    Fill: =Color.White
+                                    Height: =35
+                                    Placeholder: =""
+                                    Size: =14
+                                    Width: =headerTramitesAmbientalesgestionar.Width
+                                    X: =headerTramitesAmbientalesgestionar.X
+                              - txtpuntajetramitesambientales:
+                                  Control: ModernTextInput@1.1.1
+                                  Properties:
+                                    Align: =Align.Center
+                                    Default: |-
+                                      =Text(
+                                          Value(ThisItem.'Puntaje trámites ambientales', "en-US") * 100,
+                                          "[$-es-ES]0,00"
+                                      ) & " %"
+                                    Fill: =Color.White
+                                    Height: =35
+                                    Placeholder: =""
+                                    Size: =14
+                                    Width: =headerPuntajeTramitesAmbientales.Width
+                                    X: =headerPuntajeTramitesAmbientales.X
+                              - txttramitesambientales:
+                                  Control: ModernTextInput@1.1.1
+                                  Properties:
+                                    Align: =Align.Center
+                                    Default: =ThisItem.'Trámites Ambientales'.Value
+                                    Fill: =Color.White
+                                    Height: =35
+                                    Placeholder: =""
+                                    Size: =14
+                                    Width: =headerTramitesAmbientales.Width
+                                    X: =headerTramitesAmbientales.X
+                              - txtpuntajeclasificaciondelpot:
+                                  Control: ModernTextInput@1.1.1
+                                  Properties:
+                                    Align: =Align.Center
+                                    Default: |-
+                                      =Text(
+                                          Value(ThisItem.'Puntaje clasificación POT', "en-US") * 100,
+                                          "[$-es-ES]0,00"
+                                      ) & " %"
+                                    Fill: =Color.White
+                                    Height: =35
+                                    Placeholder: =""
+                                    Size: =14
+                                    Width: =headerPuntajeClasificaciondelPOT.Width
+                                    X: =headerPuntajeClasificaciondelPOT.X
+                              - txtclasificaciondelpot:
+                                  Control: ModernTextInput@1.1.1
+                                  Properties:
+                                    Align: =Align.Center
+                                    Default: =ThisItem.'Clasificación del POT'.Value
+                                    Fill: =Color.White
+                                    Height: =35
+                                    Placeholder: =""
+                                    Size: =14
+                                    Width: =headerClasificaciondelPOT.Width
+                                    X: =headerClasificaciondelPOT.X
+                              - txttramitesjuridicosporgestionar:
+                                  Control: ModernTextInput@1.1.1
+                                  Properties:
+                                    Align: =Align.Center
+                                    Default: |-
+                                      =Concat(
+                                          ThisItem.'Trámites jurídicos por gestionar',
+                                          Value,
+                                          ", "
+                                      )
+                                    Fill: =Color.White
+                                    Height: =35
+                                    Placeholder: =""
+                                    Size: =14
+                                    Width: =headerTrámitesjurídicosporgestionar.Width
+                                    X: =headerTrámitesjurídicosporgestionar.X
+                              - txtpuntajegestionjudicialpredial:
+                                  Control: ModernTextInput@1.1.1
+                                  Properties:
+                                    Align: =Align.Center
+                                    Default: |-
+                                      =Text(
+                                          Value(ThisItem.'Puntaje gestión jurídica predial', "en-US") * 100,
+                                          "[$-es-ES]0,00"
+                                      ) & " %"
+                                    Fill: =Color.White
+                                    Height: =35
+                                    Placeholder: =""
+                                    Size: =14
+                                    Width: =headerPuntajeGestionjuridicapredial.Width
+                                    X: =headerPuntajeGestionjuridicapredial.X
+                              - txtgestionjuridicapredial:
+                                  Control: ModernTextInput@1.1.1
+                                  Properties:
+                                    Align: =Align.Center
+                                    Default: =ThisItem.'Gestión jurídica predial'.Value
+                                    Fill: =Color.White
+                                    Height: =35
+                                    Placeholder: =""
+                                    Size: =14
+                                    Width: =headerGestionjuridicapredial.Width
+                                    X: =headerGestionjuridicapredial.X
+                              - txtcondicionjuridicadepriorizacion:
+                                  Control: ModernTextInput@1.1.1
+                                  Properties:
+                                    Align: =Align.Center
+                                    Default: |-
+                                      =Concat(
+                                          ThisItem.'Condición jurídica de priorización',
+                                          Value,
+                                          ", "
+                                      )
+                                    Fill: =Color.White
+                                    Height: =35
+                                    Placeholder: =""
+                                    Size: =14
+                                    Width: =headerCondicionJuridicaPriorizacion.Width
+                                    X: =headerCondicionJuridicaPriorizacion.X
+                              - txtestudiostecnicospendientes:
+                                  Control: ModernTextInput@1.1.1
+                                  Properties:
+                                    Align: =Align.Center
+                                    Default: |-
+                                      =Concat(
+                                          ThisItem.'Estudios técnicos pendientes',
+                                          Value,
+                                          ", "
+                                      )
+                                    Fill: =Color.White
+                                    Height: =35
+                                    Placeholder: =""
+                                    Size: =14
+                                    Width: =headerEstudiosTecnicosPendientes.Width
+                                    X: =headerEstudiosTecnicosPendientes.X
+                              - txtpuntajeestudiostecnicos:
+                                  Control: ModernTextInput@1.1.1
+                                  Properties:
+                                    Align: =Align.Center
+                                    Default: |-
+                                      =Text(
+                                          Value(ThisItem.'Puntaje estudios técnicos', "en-US") * 100,
+                                          "[$-es-ES]0,00"
+                                      ) & " %"
+                                    Fill: =Color.White
+                                    Height: =35
+                                    Placeholder: =""
+                                    Size: =14
+                                    Width: =headerPuntajeEstudiosTecnicos.Width
+                                    X: =headerPuntajeEstudiosTecnicos.X
+                              - txtestudiostecnicos:
+                                  Control: ModernTextInput@1.1.1
+                                  Properties:
+                                    Align: =Align.Center
+                                    Default: =ThisItem.'Estudios técnicos'.Value
+                                    Fill: =Color.White
+                                    Height: =35
+                                    Placeholder: =""
+                                    Size: =14
+                                    Width: =headerEstudiosTecnicos.Width
+                                    X: =headerEstudiosTecnicos.X
+                              - txtpuntajecobertura:
+                                  Control: ModernTextInput@1.1.1
+                                  Properties:
+                                    Align: =Align.Center
+                                    Default: |-
+                                      =Text(
+                                          Value(ThisItem.'Puntaje cobertura', "en-US") * 100,
+                                          "[$-es-ES]0,00"
+                                      ) & " %"
+                                    Fill: =Color.White
+                                    Height: =35
+                                    Placeholder: =""
+                                    Size: =14
+                                    Width: =headerPuntajeCobertura.Width
+                                    X: =headerPuntajeCobertura.X
+                              - txtcobertura:
+                                  Control: ModernTextInput@1.1.1
+                                  Properties:
+                                    Align: =Align.Center
+                                    Default: =ThisItem.Cobertura.Value
+                                    Fill: =Color.White
+                                    Height: =35
+                                    Placeholder: =""
+                                    Size: =14
+                                    Width: =headerCobertura.Width
+                                    X: =headerCobertura.X
+                              - txtpuntajecontinuidad:
+                                  Control: ModernTextInput@1.1.1
+                                  Properties:
+                                    Align: =Align.Center
+                                    Default: |-
+                                      =Text(
+                                          Value(ThisItem.'Puntaje continuidad', "en-US") * 100,
+                                          "[$-es-ES]0,00"
+                                      ) & " %"
+                                    Fill: =Color.White
+                                    Height: =35
+                                    Placeholder: =""
+                                    Size: =14
+                                    Width: =headerPuntajeContinuidadPri.Width
+                                    X: =headerPuntajeContinuidadPri.X
+                              - txtcontinuidad:
+                                  Control: ModernTextInput@1.1.1
+                                  Properties:
+                                    Align: =Align.Center
+                                    Default: =ThisItem.Continuidad.Value
+                                    Fill: =Color.White
+                                    Height: =35
+                                    Placeholder: =""
+                                    Size: =14
+                                    Width: =headerContinuidadPri.Width
+                                    X: =headerContinuidadPri.X
+                              - txtpuntajecalidaddelagua:
+                                  Control: ModernTextInput@1.1.1
+                                  Properties:
+                                    Align: =Align.Center
+                                    Default: |-
+                                      =Text(
+                                          Value(ThisItem.'Puntaje calidad del agua', "en-US") * 100,
+                                          "[$-es-ES]0,00"
+                                      ) & " %"
+                                    Fill: =Color.White
+                                    Height: =35
+                                    Placeholder: =""
+                                    Size: =14
+                                    Width: =headerPuntajeCalidadAguaPri.Width
+                                    X: =headerPuntajeCalidadAguaPri.X
+                              - txtcalidaddelagua:
+                                  Control: ModernTextInput@1.1.1
+                                  Properties:
+                                    Align: =Align.Center
+                                    Default: =ThisItem.'Calidad del agua'.Value
+                                    Fill: =Color.White
+                                    Height: =35
+                                    Placeholder: =""
+                                    Size: =14
+                                    Width: =headerCalidaddelAguaPri.Width
+                                    X: =headerCalidaddelAguaPri.X
+                              - txtcomuna:
+                                  Control: ModernTextInput@1.1.1
+                                  Properties:
+                                    Align: =Align.Center
+                                    Default: =ThisItem.Comuna.Value
+                                    Fill: =Color.White
+                                    Height: =35
+                                    Placeholder: =""
+                                    Size: =14
+                                    Width: =headerComunaPri.Width
+                                    X: =headerComunaPri.X
+                              - txttipodesistema:
+                                  Control: ModernTextInput@1.1.1
+                                  Properties:
+                                    Align: =Align.Center
+                                    Default: =ThisItem.'Tipo de sistema'.Value
+                                    Fill: =Color.White
+                                    Height: =35
+                                    Placeholder: =""
+                                    Size: =14
+                                    Width: =headerTipoSistemaPri.Width
+                                    X: =headerTipoSistemaPri.X
+                              - txtnombreproyecto:
+                                  Control: ModernTextInput@1.1.1
+                                  Properties:
+                                    Align: =Align.Center
+                                    Default: =ThisItem.'Nombre del proyecto'
+                                    Fill: =Color.White
+                                    Height: =35
+                                    Placeholder: =""
+                                    Size: =14
+                                    Width: =headerNombreProyectoPri.Width
+                                    X: =headerNombreProyectoPri.X
+                              - txtpriorizadopor:
+                                  Control: ModernTextInput@1.1.1
+                                  Properties:
+                                    Align: =Align.Center
+                                    Default: =ThisItem.'Priorizado por'
+                                    Fill: =Color.White
+                                    Height: =34
+                                    Placeholder: =""
+                                    Size: =14
+                                    Width: =headerPriorizadopor.Width
+                                    X: =headerPriorizadopor.X
+                                    Y: =1
+                              - txtfechapriorizacion:
+                                  Control: ModernTextInput@1.1.1
+                                  Properties:
+                                    Align: =Align.Center
+                                    Default: =ThisItem.'Fecha de priorización'
+                                    Fill: =Color.White
+                                    Height: =34
+                                    Placeholder: =""
+                                    Size: =14
+                                    Width: =headerFechadePriorizacion.Width
+                                    X: =headerFechadePriorizacion.X
+                                    Y: =1
+                              - txtnumeroradicadopri:
+                                  Control: ModernTextInput@1.1.1
+                                  Properties:
+                                    Align: =Align.Center
+                                    Default: =ThisItem.'Numero radicado entrada'
+                                    DisplayMode: =
+                                    Fill: =Color.White
+                                    Height: =34
+                                    Placeholder: =""
+                                    Size: =14
+                                    Width: =headerNumeroRadicadoPri.Width-Iconverpri.Width-Iconeditpri.Width
+                                    X: =headerNumeroRadicadoPri.X+Iconverpri.Width+Iconeditpri.Width
+                                    Y: =1
+                              - Iconverpri:
+                                  Control: Classic/Icon@2.5.0
+                                  Properties:
+                                    BorderColor: =RGBA(0, 18, 107, 1)
+                                    Color: =ColorValue("#1a3a5c")
+                                    Fill: =RGBA(255, 255, 255, 1)
+                                    Height: =25
+                                    Icon: =Icon.View
+                                    OnSelect: |-
+                                      =ResetForm(FormDatosGeneralesPri);
+                                      ResetForm(FormComponenteTecnico);
+                                      ResetForm(FormPriComponenteJuridico);
+                                      Set(
+                                          varFormDataPri,
+                                          ThisItem
+                                      );
+                                      Set(
+                                          varFormMode2,
+                                          FormMode.View
+                                      );
+                                      Navigate('Pri-GeneralesPriorizacion'
+                                      )
+                                    Tooltip: ="Ver priorizacion"
+                                    Width: =25
+                              - Iconeditpri:
+                                  Control: Classic/Icon@2.5.0
+                                  Properties:
+                                    BorderColor: =RGBA(0, 18, 107, 1)
+                                    Color: =ColorValue("#1a3a5c")
+                                    Fill: =RGBA(255, 255, 255, 1)
+                                    Height: =25
+                                    Icon: =Icon.Edit
+                                    OnSelect: |-
+                                      =ResetForm(FormDatosGeneralesPri);
+                                      ResetForm(FormComponenteTecnico);
+                                      ResetForm(FormPriComponenteJuridico);
+                                      Set(
+                                          varFormDataPri,
+                                          ThisItem
+                                      );
+                                      Set(
+                                          varFormMode2,
+                                          FormMode.Edit
+                                      );
+                                      Navigate('Pri-GeneralesPriorizacion'
+                                      )
+                                    Tooltip: ="Editar priorizacion"
+                                    Width: =25
+                                    X: =25
+                  - GridHeaderPri:
+                      Control: GroupContainer@1.5.0
+                      Variant: ManualLayout
+                      Properties:
+                        Fill: =ColorValue("#1a3a5c")
+                        Height: =34
+                        RadiusBottomLeft: =0
+                        RadiusBottomRight: =0
+                        RadiusTopLeft: =0
+                        RadiusTopRight: =0
+                        Width: =1120
+                      Children:
+                        - headerObservacionestecnicas:
+                            Control: Classic/Button@2.2.0
+                            Properties:
+                              BorderColor: =ColorFade(Self.Fill, -15%)
+                              Color: =RGBA(255, 255, 255, 1)
+                              DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                              Fill: =ColorValue("#1a3a5c")
+                              Font: =Font.'Open Sans'
+                              Height: =34
+                              HoverBorderColor: =ColorFade(Self.BorderColor, 20%)
+                              HoverColor: =RGBA(255, 255, 255, 1)
+                              HoverFill: =ColorFade(RGBA(56, 96, 178, 1), -20%)
+                              PressedBorderColor: =Self.Fill
+                              PressedColor: =Self.Fill
+                              PressedFill: =Self.Color
+                              RadiusBottomLeft: =0
+                              RadiusBottomRight: =0
+                              RadiusTopLeft: =0
+                              RadiusTopRight: =0
+                              Size: =10
+                              Text: ="Observaciones técnicas"
+                              Width: =460
+                              X: =headerConceptofinal.X+headerConceptofinal.Width
+                        - headerConceptofinal:
+                            Control: Classic/Button@2.2.0
+                            Properties:
+                              BorderColor: =ColorFade(Self.Fill, -15%)
+                              Color: =RGBA(255, 255, 255, 1)
+                              DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                              Fill: =ColorValue("#1a3a5c")
+                              Font: =Font.'Open Sans'
+                              Height: =34
+                              HoverBorderColor: =ColorFade(Self.BorderColor, 20%)
+                              HoverColor: =RGBA(255, 255, 255, 1)
+                              HoverFill: =ColorFade(RGBA(56, 96, 178, 1), -20%)
+                              PressedBorderColor: =Self.Fill
+                              PressedColor: =Self.Fill
+                              PressedFill: =Self.Color
+                              RadiusBottomLeft: =0
+                              RadiusBottomRight: =0
+                              RadiusTopLeft: =0
+                              RadiusTopRight: =0
+                              Size: =10
+                              Text: ="Concepto final"
+                              Width: =130
+                              X: =headerResultadoEvaluacionCriterios.X+headerResultadoEvaluacionCriterios.Width
+                        - headerResultadoEvaluacionCriterios:
+                            Control: Classic/Button@2.2.0
+                            Properties:
+                              BorderColor: =ColorFade(Self.Fill, -15%)
+                              Color: =RGBA(255, 255, 255, 1)
+                              DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                              Fill: =ColorValue("#1a3a5c")
+                              Font: =Font.'Open Sans'
+                              Height: =34
+                              HoverBorderColor: =ColorFade(Self.BorderColor, 20%)
+                              HoverColor: =RGBA(255, 255, 255, 1)
+                              HoverFill: =ColorFade(RGBA(56, 96, 178, 1), -20%)
+                              PressedBorderColor: =Self.Fill
+                              PressedColor: =Self.Fill
+                              PressedFill: =Self.Color
+                              RadiusBottomLeft: =0
+                              RadiusBottomRight: =0
+                              RadiusTopLeft: =0
+                              RadiusTopRight: =0
+                              Size: =10
+                              Text: ="Resultado de evaluación de criterios(%)"
+                              Width: =290
+                              X: =headerPuntajecostobeneficio.X+headerPuntajecostobeneficio.Width
+                        - headerPuntajecostobeneficio:
+                            Control: Classic/Button@2.2.0
+                            Properties:
+                              BorderColor: =ColorFade(Self.Fill, -15%)
+                              Color: =RGBA(255, 255, 255, 1)
+                              DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                              Fill: =ColorValue("#1a3a5c")
+                              Font: =Font.'Open Sans'
+                              Height: =34
+                              HoverBorderColor: =ColorFade(Self.BorderColor, 20%)
+                              HoverColor: =RGBA(255, 255, 255, 1)
+                              HoverFill: =ColorFade(RGBA(56, 96, 178, 1), -20%)
+                              PressedBorderColor: =Self.Fill
+                              PressedColor: =Self.Fill
+                              PressedFill: =Self.Color
+                              RadiusBottomLeft: =0
+                              RadiusBottomRight: =0
+                              RadiusTopLeft: =0
+                              RadiusTopRight: =0
+                              Size: =10
+                              Text: ="Puntaje costo beneficio"
+                              Width: =190
+                              X: =headerCostobeneficio.X+headerCostobeneficio.Width
+                        - headerCostobeneficio:
+                            Control: Classic/Button@2.2.0
+                            Properties:
+                              BorderColor: =ColorFade(Self.Fill, -15%)
+                              Color: =RGBA(255, 255, 255, 1)
+                              DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                              Fill: =ColorValue("#1a3a5c")
+                              Font: =Font.'Open Sans'
+                              Height: =34
+                              HoverBorderColor: =ColorFade(Self.BorderColor, 20%)
+                              HoverColor: =RGBA(255, 255, 255, 1)
+                              HoverFill: =ColorFade(RGBA(56, 96, 178, 1), -20%)
+                              PressedBorderColor: =Self.Fill
+                              PressedColor: =Self.Fill
+                              PressedFill: =Self.Color
+                              RadiusBottomLeft: =0
+                              RadiusBottomRight: =0
+                              RadiusTopLeft: =0
+                              RadiusTopRight: =0
+                              Size: =10
+                              Text: ="Costo/Beneficios"
+                              Width: =130
+                              X: =headerPuntajecoberturaviviendas.X+headerPuntajecoberturaviviendas.Width
+                        - headerPuntajecoberturaviviendas:
+                            Control: Classic/Button@2.2.0
+                            Properties:
+                              BorderColor: =ColorFade(Self.Fill, -15%)
+                              Color: =RGBA(255, 255, 255, 1)
+                              DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                              Fill: =ColorValue("#1a3a5c")
+                              Font: =Font.'Open Sans'
+                              Height: =34
+                              HoverBorderColor: =ColorFade(Self.BorderColor, 20%)
+                              HoverColor: =RGBA(255, 255, 255, 1)
+                              HoverFill: =ColorFade(RGBA(56, 96, 178, 1), -20%)
+                              PressedBorderColor: =Self.Fill
+                              PressedColor: =Self.Fill
+                              PressedFill: =Self.Color
+                              RadiusBottomLeft: =0
+                              RadiusBottomRight: =0
+                              RadiusTopLeft: =0
+                              RadiusTopRight: =0
+                              Size: =10
+                              Text: ="Puntaje cobertura viviendas"
+                              Width: =200
+                              X: =headerCoberturaviviandasbeneficiar.X+headerCoberturaviviandasbeneficiar.Width
+                        - headerCoberturaviviandasbeneficiar:
+                            Control: Classic/Button@2.2.0
+                            Properties:
+                              BorderColor: =ColorFade(Self.Fill, -15%)
+                              Color: =RGBA(255, 255, 255, 1)
+                              DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                              Fill: =ColorValue("#1a3a5c")
+                              Font: =Font.'Open Sans'
+                              Height: =34
+                              HoverBorderColor: =ColorFade(Self.BorderColor, 20%)
+                              HoverColor: =RGBA(255, 255, 255, 1)
+                              HoverFill: =ColorFade(RGBA(56, 96, 178, 1), -20%)
+                              PressedBorderColor: =Self.Fill
+                              PressedColor: =Self.Fill
+                              PressedFill: =Self.Color
+                              RadiusBottomLeft: =0
+                              RadiusBottomRight: =0
+                              RadiusTopLeft: =0
+                              RadiusTopRight: =0
+                              Size: =10
+                              Text: ="Cobertura viviendas a beneficiar"
+                              Width: =233
+                              X: =headerPuntajeparticipacionciudadana.X+headerPuntajeparticipacionciudadana.Width
+                        - headerPuntajeparticipacionciudadana:
+                            Control: Classic/Button@2.2.0
+                            Properties:
+                              BorderColor: =ColorFade(Self.Fill, -15%)
+                              Color: =RGBA(255, 255, 255, 1)
+                              DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                              Fill: =ColorValue("#1a3a5c")
+                              Font: =Font.'Open Sans'
+                              Height: =34
+                              HoverBorderColor: =ColorFade(Self.BorderColor, 20%)
+                              HoverColor: =RGBA(255, 255, 255, 1)
+                              HoverFill: =ColorFade(RGBA(56, 96, 178, 1), -20%)
+                              PressedBorderColor: =Self.Fill
+                              PressedColor: =Self.Fill
+                              PressedFill: =Self.Color
+                              RadiusBottomLeft: =0
+                              RadiusBottomRight: =0
+                              RadiusTopLeft: =0
+                              RadiusTopRight: =0
+                              Size: =10
+                              Text: ="Puntaje participación ciudadana"
+                              Width: =233
+                              X: =headerParticipaciónCiudadanaLegitimidadSocial.X+headerParticipaciónCiudadanaLegitimidadSocial.Width
+                        - headerParticipaciónCiudadanaLegitimidadSocial:
+                            Control: Classic/Button@2.2.0
+                            Properties:
+                              BorderColor: =ColorFade(Self.Fill, -15%)
+                              Color: =RGBA(255, 255, 255, 1)
+                              DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                              Fill: =ColorValue("#1a3a5c")
+                              Font: =Font.'Open Sans'
+                              Height: =34
+                              HoverBorderColor: =ColorFade(Self.BorderColor, 20%)
+                              HoverColor: =RGBA(255, 255, 255, 1)
+                              HoverFill: =ColorFade(RGBA(56, 96, 178, 1), -20%)
+                              PressedBorderColor: =Self.Fill
+                              PressedColor: =Self.Fill
+                              PressedFill: =Self.Color
+                              RadiusBottomLeft: =0
+                              RadiusBottomRight: =0
+                              RadiusTopLeft: =0
+                              RadiusTopRight: =0
+                              Size: =10
+                              Text: ="Participación ciudadana y legitimidad social"
+                              Width: =300
+                              X: =headerPuntajeimpactocostos.X+headerPuntajeimpactocostos.Width
+                        - headerPuntajeimpactocostos:
+                            Control: Classic/Button@2.2.0
+                            Properties:
+                              BorderColor: =ColorFade(Self.Fill, -15%)
+                              Color: =RGBA(255, 255, 255, 1)
+                              DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                              Fill: =ColorValue("#1a3a5c")
+                              Font: =Font.'Open Sans'
+                              Height: =34
+                              HoverBorderColor: =ColorFade(Self.BorderColor, 20%)
+                              HoverColor: =RGBA(255, 255, 255, 1)
+                              HoverFill: =ColorFade(RGBA(56, 96, 178, 1), -20%)
+                              PressedBorderColor: =Self.Fill
+                              PressedColor: =Self.Fill
+                              PressedFill: =Self.Color
+                              RadiusBottomLeft: =0
+                              RadiusBottomRight: =0
+                              RadiusTopLeft: =0
+                              RadiusTopRight: =0
+                              Size: =10
+                              Text: ="Puntaje impacto en costos"
+                              Width: =200
+                              X: =headerImpactocostosdeprestacion.X+headerImpactocostosdeprestacion.Width
+                        - headerImpactocostosdeprestacion:
+                            Control: Classic/Button@2.2.0
+                            Properties:
+                              BorderColor: =ColorFade(Self.Fill, -15%)
+                              Color: =RGBA(255, 255, 255, 1)
+                              DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                              Fill: =ColorValue("#1a3a5c")
+                              Font: =Font.'Open Sans'
+                              Height: =34
+                              HoverBorderColor: =ColorFade(Self.BorderColor, 20%)
+                              HoverColor: =RGBA(255, 255, 255, 1)
+                              HoverFill: =ColorFade(RGBA(56, 96, 178, 1), -20%)
+                              PressedBorderColor: =Self.Fill
+                              PressedColor: =Self.Fill
+                              PressedFill: =Self.Color
+                              RadiusBottomLeft: =0
+                              RadiusBottomRight: =0
+                              RadiusTopLeft: =0
+                              RadiusTopRight: =0
+                              Size: =10
+                              Text: ="Impacto en costos de prestación"
+                              Width: =250
+                              X: =headerTramitesAmbientalesgestionar.X+headerTramitesAmbientalesgestionar.Width
+                        - headerTramitesAmbientalesgestionar:
+                            Control: Classic/Button@2.2.0
+                            Properties:
+                              BorderColor: =ColorFade(Self.Fill, -15%)
+                              Color: =RGBA(255, 255, 255, 1)
+                              DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                              Fill: =ColorValue("#1a3a5c")
+                              Font: =Font.'Open Sans'
+                              Height: =34
+                              HoverBorderColor: =ColorFade(Self.BorderColor, 20%)
+                              HoverColor: =RGBA(255, 255, 255, 1)
+                              HoverFill: =ColorFade(RGBA(56, 96, 178, 1), -20%)
+                              PressedBorderColor: =Self.Fill
+                              PressedColor: =Self.Fill
+                              PressedFill: =Self.Color
+                              RadiusBottomLeft: =0
+                              RadiusBottomRight: =0
+                              RadiusTopLeft: =0
+                              RadiusTopRight: =0
+                              Size: =10
+                              Text: ="Trámites ambientales por gestionar"
+                              Width: =300
+                              X: =headerPuntajeTramitesAmbientales.X+headerPuntajeTramitesAmbientales.Width
+                        - headerPuntajeTramitesAmbientales:
+                            Control: Classic/Button@2.2.0
+                            Properties:
+                              BorderColor: =ColorFade(Self.Fill, -15%)
+                              Color: =RGBA(255, 255, 255, 1)
+                              DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                              Fill: =ColorValue("#1a3a5c")
+                              Font: =Font.'Open Sans'
+                              Height: =34
+                              HoverBorderColor: =ColorFade(Self.BorderColor, 20%)
+                              HoverColor: =RGBA(255, 255, 255, 1)
+                              HoverFill: =ColorFade(RGBA(56, 96, 178, 1), -20%)
+                              PressedBorderColor: =Self.Fill
+                              PressedColor: =Self.Fill
+                              PressedFill: =Self.Color
+                              RadiusBottomLeft: =0
+                              RadiusBottomRight: =0
+                              RadiusTopLeft: =0
+                              RadiusTopRight: =0
+                              Size: =10
+                              Text: =" Puntaje Trámites Ambientales"
+                              Width: =233
+                              X: =headerTramitesAmbientales.X+headerTramitesAmbientales.Width
+                        - headerTramitesAmbientales:
+                            Control: Classic/Button@2.2.0
+                            Properties:
+                              BorderColor: =ColorFade(Self.Fill, -15%)
+                              Color: =RGBA(255, 255, 255, 1)
+                              DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                              Fill: =ColorValue("#1a3a5c")
+                              Font: =Font.'Open Sans'
+                              Height: =34
+                              HoverBorderColor: =ColorFade(Self.BorderColor, 20%)
+                              HoverColor: =RGBA(255, 255, 255, 1)
+                              HoverFill: =ColorFade(RGBA(56, 96, 178, 1), -20%)
+                              PressedBorderColor: =Self.Fill
+                              PressedColor: =Self.Fill
+                              PressedFill: =Self.Color
+                              RadiusBottomLeft: =0
+                              RadiusBottomRight: =0
+                              RadiusTopLeft: =0
+                              RadiusTopRight: =0
+                              Size: =10
+                              Text: ="Trámites Ambientales"
+                              Width: =200
+                              X: =headerPuntajeClasificaciondelPOT.X+headerPuntajeClasificaciondelPOT.Width
+                        - headerPuntajeClasificaciondelPOT:
+                            Control: Classic/Button@2.2.0
+                            Properties:
+                              BorderColor: =ColorFade(Self.Fill, -15%)
+                              Color: =RGBA(255, 255, 255, 1)
+                              DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                              Fill: =ColorValue("#1a3a5c")
+                              Font: =Font.'Open Sans'
+                              Height: =34
+                              HoverBorderColor: =ColorFade(Self.BorderColor, 20%)
+                              HoverColor: =RGBA(255, 255, 255, 1)
+                              HoverFill: =ColorFade(RGBA(56, 96, 178, 1), -20%)
+                              PressedBorderColor: =Self.Fill
+                              PressedColor: =Self.Fill
+                              PressedFill: =Self.Color
+                              RadiusBottomLeft: =0
+                              RadiusBottomRight: =0
+                              RadiusTopLeft: =0
+                              RadiusTopRight: =0
+                              Size: =10
+                              Text: ="Puntaje Clasificación del POT"
+                              Width: =200
+                              X: =headerClasificaciondelPOT.X+headerClasificaciondelPOT.Width
+                        - headerClasificaciondelPOT:
+                            Control: Classic/Button@2.2.0
+                            Properties:
+                              BorderColor: =ColorFade(Self.Fill, -15%)
+                              Color: =RGBA(255, 255, 255, 1)
+                              DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                              Fill: =ColorValue("#1a3a5c")
+                              Font: =Font.'Open Sans'
+                              Height: =34
+                              HoverBorderColor: =ColorFade(Self.BorderColor, 20%)
+                              HoverColor: =RGBA(255, 255, 255, 1)
+                              HoverFill: =ColorFade(RGBA(56, 96, 178, 1), -20%)
+                              PressedBorderColor: =Self.Fill
+                              PressedColor: =Self.Fill
+                              PressedFill: =Self.Color
+                              RadiusBottomLeft: =0
+                              RadiusBottomRight: =0
+                              RadiusTopLeft: =0
+                              RadiusTopRight: =0
+                              Size: =10
+                              Text: ="Clasificación del POT"
+                              Width: =200
+                              X: =headerTrámitesjurídicosporgestionar.X+headerTrámitesjurídicosporgestionar.Width
+                        - headerTrámitesjurídicosporgestionar:
+                            Control: Classic/Button@2.2.0
+                            Properties:
+                              BorderColor: =ColorFade(Self.Fill, -15%)
+                              Color: =RGBA(255, 255, 255, 1)
+                              DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                              Fill: =ColorValue("#1a3a5c")
+                              Font: =Font.'Open Sans'
+                              Height: =34
+                              HoverBorderColor: =ColorFade(Self.BorderColor, 20%)
+                              HoverColor: =RGBA(255, 255, 255, 1)
+                              HoverFill: =ColorFade(RGBA(56, 96, 178, 1), -20%)
+                              PressedBorderColor: =Self.Fill
+                              PressedColor: =Self.Fill
+                              PressedFill: =Self.Color
+                              RadiusBottomLeft: =0
+                              RadiusBottomRight: =0
+                              RadiusTopLeft: =0
+                              RadiusTopRight: =0
+                              Size: =10
+                              Text: ="Trámites jurídicos por gestionar"
+                              Width: =300
+                              X: =headerPuntajeGestionjuridicapredial.X+headerPuntajeGestionjuridicapredial.Width
+                        - headerPuntajeGestionjuridicapredial:
+                            Control: Classic/Button@2.2.0
+                            Properties:
+                              BorderColor: =ColorFade(Self.Fill, -15%)
+                              Color: =RGBA(255, 255, 255, 1)
+                              DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                              Fill: =ColorValue("#1a3a5c")
+                              Font: =Font.'Open Sans'
+                              Height: =34
+                              HoverBorderColor: =ColorFade(Self.BorderColor, 20%)
+                              HoverColor: =RGBA(255, 255, 255, 1)
+                              HoverFill: =ColorFade(RGBA(56, 96, 178, 1), -20%)
+                              PressedBorderColor: =Self.Fill
+                              PressedColor: =Self.Fill
+                              PressedFill: =Self.Color
+                              RadiusBottomLeft: =0
+                              RadiusBottomRight: =0
+                              RadiusTopLeft: =0
+                              RadiusTopRight: =0
+                              Size: =10
+                              Text: ="Puntaje Gestión jurídica predial"
+                              Width: =300
+                              X: =headerGestionjuridicapredial.X+headerGestionjuridicapredial.Width
+                        - headerGestionjuridicapredial:
+                            Control: Classic/Button@2.2.0
+                            Properties:
+                              BorderColor: =ColorFade(Self.Fill, -15%)
+                              Color: =RGBA(255, 255, 255, 1)
+                              DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                              Fill: =ColorValue("#1a3a5c")
+                              Font: =Font.'Open Sans'
+                              Height: =34
+                              HoverBorderColor: =ColorFade(Self.BorderColor, 20%)
+                              HoverColor: =RGBA(255, 255, 255, 1)
+                              HoverFill: =ColorFade(RGBA(56, 96, 178, 1), -20%)
+                              PressedBorderColor: =Self.Fill
+                              PressedColor: =Self.Fill
+                              PressedFill: =Self.Color
+                              RadiusBottomLeft: =0
+                              RadiusBottomRight: =0
+                              RadiusTopLeft: =0
+                              RadiusTopRight: =0
+                              Size: =10
+                              Text: ="Gestión jurídica predial"
+                              Width: =300
+                              X: =headerCondicionJuridicaPriorizacion.X+headerCondicionJuridicaPriorizacion.Width
+                        - headerCondicionJuridicaPriorizacion:
+                            Control: Classic/Button@2.2.0
+                            Properties:
+                              BorderColor: =ColorFade(Self.Fill, -15%)
+                              Color: =RGBA(255, 255, 255, 1)
+                              DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                              Fill: =ColorValue("#1a3a5c")
+                              Font: =Font.'Open Sans'
+                              Height: =34
+                              HoverBorderColor: =ColorFade(Self.BorderColor, 20%)
+                              HoverColor: =RGBA(255, 255, 255, 1)
+                              HoverFill: =ColorFade(RGBA(56, 96, 178, 1), -20%)
+                              PressedBorderColor: =Self.Fill
+                              PressedColor: =Self.Fill
+                              PressedFill: =Self.Color
+                              RadiusBottomLeft: =0
+                              RadiusBottomRight: =0
+                              RadiusTopLeft: =0
+                              RadiusTopRight: =0
+                              Size: =10
+                              Text: ="Condición jurídica de priorización"
+                              Width: =300
+                              X: =headerEstudiosTecnicosPendientes.X+headerEstudiosTecnicosPendientes.Width
+                        - headerEstudiosTecnicosPendientes:
+                            Control: Classic/Button@2.2.0
+                            Properties:
+                              BorderColor: =ColorFade(Self.Fill, -15%)
+                              Color: =RGBA(255, 255, 255, 1)
+                              DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                              Fill: =ColorValue("#1a3a5c")
+                              Font: =Font.'Open Sans'
+                              Height: =34
+                              HoverBorderColor: =ColorFade(Self.BorderColor, 20%)
+                              HoverColor: =RGBA(255, 255, 255, 1)
+                              HoverFill: =ColorFade(RGBA(56, 96, 178, 1), -20%)
+                              PressedBorderColor: =Self.Fill
+                              PressedColor: =Self.Fill
+                              PressedFill: =Self.Color
+                              RadiusBottomLeft: =0
+                              RadiusBottomRight: =0
+                              RadiusTopLeft: =0
+                              RadiusTopRight: =0
+                              Size: =10
+                              Text: ="Estudios técnicos pendientes"
+                              Width: =300
+                              X: =headerPuntajeEstudiosTecnicos.X+headerPuntajeEstudiosTecnicos.Width
+                        - headerPuntajeEstudiosTecnicos:
+                            Control: Classic/Button@2.2.0
+                            Properties:
+                              BorderColor: =ColorFade(Self.Fill, -15%)
+                              Color: =RGBA(255, 255, 255, 1)
+                              DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                              Fill: =ColorValue("#1a3a5c")
+                              Font: =Font.'Open Sans'
+                              Height: =34
+                              HoverBorderColor: =ColorFade(Self.BorderColor, 20%)
+                              HoverColor: =RGBA(255, 255, 255, 1)
+                              HoverFill: =ColorFade(RGBA(56, 96, 178, 1), -20%)
+                              PressedBorderColor: =Self.Fill
+                              PressedColor: =Self.Fill
+                              PressedFill: =Self.Color
+                              RadiusBottomLeft: =0
+                              RadiusBottomRight: =0
+                              RadiusTopLeft: =0
+                              RadiusTopRight: =0
+                              Size: =10
+                              Text: ="Puntaje estudios técnicos"
+                              Width: =200
+                              X: =headerEstudiosTecnicos.X+headerEstudiosTecnicos.Width
+                        - headerEstudiosTecnicos:
+                            Control: Classic/Button@2.2.0
+                            Properties:
+                              BorderColor: =ColorFade(Self.Fill, -15%)
+                              Color: =RGBA(255, 255, 255, 1)
+                              DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                              Fill: =ColorValue("#1a3a5c")
+                              Font: =Font.'Open Sans'
+                              Height: =34
+                              HoverBorderColor: =ColorFade(Self.BorderColor, 20%)
+                              HoverColor: =RGBA(255, 255, 255, 1)
+                              HoverFill: =ColorFade(RGBA(56, 96, 178, 1), -20%)
+                              PressedBorderColor: =Self.Fill
+                              PressedColor: =Self.Fill
+                              PressedFill: =Self.Color
+                              RadiusBottomLeft: =0
+                              RadiusBottomRight: =0
+                              RadiusTopLeft: =0
+                              RadiusTopRight: =0
+                              Size: =10
+                              Text: ="Estudios  técnicos"
+                              Width: =200
+                              X: =headerPuntajeCobertura.X+headerPuntajeCobertura.Width
+                        - headerPuntajeCobertura:
+                            Control: Classic/Button@2.2.0
+                            Properties:
+                              BorderColor: =ColorFade(Self.Fill, -15%)
+                              Color: =RGBA(255, 255, 255, 1)
+                              DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                              Fill: =ColorValue("#1a3a5c")
+                              Font: =Font.'Open Sans'
+                              Height: =34
+                              HoverBorderColor: =ColorFade(Self.BorderColor, 20%)
+                              HoverColor: =RGBA(255, 255, 255, 1)
+                              HoverFill: =ColorFade(RGBA(56, 96, 178, 1), -20%)
+                              PressedBorderColor: =Self.Fill
+                              PressedColor: =Self.Fill
+                              PressedFill: =Self.Color
+                              RadiusBottomLeft: =0
+                              RadiusBottomRight: =0
+                              RadiusTopLeft: =0
+                              RadiusTopRight: =0
+                              Size: =10
+                              Text: ="Puntaje cobertura"
+                              Width: =200
+                              X: =headerCobertura.X+headerCobertura.Width
+                        - headerCobertura:
+                            Control: Classic/Button@2.2.0
+                            Properties:
+                              BorderColor: =ColorFade(Self.Fill, -15%)
+                              Color: =RGBA(255, 255, 255, 1)
+                              DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                              Fill: =ColorValue("#1a3a5c")
+                              Font: =Font.'Open Sans'
+                              Height: =34
+                              HoverBorderColor: =ColorFade(Self.BorderColor, 20%)
+                              HoverColor: =RGBA(255, 255, 255, 1)
+                              HoverFill: =ColorFade(RGBA(56, 96, 178, 1), -20%)
+                              PressedBorderColor: =Self.Fill
+                              PressedColor: =Self.Fill
+                              PressedFill: =Self.Color
+                              RadiusBottomLeft: =0
+                              RadiusBottomRight: =0
+                              RadiusTopLeft: =0
+                              RadiusTopRight: =0
+                              Size: =10
+                              Text: ="Cobertura"
+                              Width: =200
+                              X: =headerPuntajeContinuidadPri.X+headerPuntajeContinuidadPri.Width
+                        - headerPuntajeContinuidadPri:
+                            Control: Classic/Button@2.2.0
+                            Properties:
+                              BorderColor: =ColorFade(Self.Fill, -15%)
+                              Color: =RGBA(255, 255, 255, 1)
+                              DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                              Fill: =ColorValue("#1a3a5c")
+                              Font: =Font.'Open Sans'
+                              Height: =34
+                              HoverBorderColor: =ColorFade(Self.BorderColor, 20%)
+                              HoverColor: =RGBA(255, 255, 255, 1)
+                              HoverFill: =ColorFade(RGBA(56, 96, 178, 1), -20%)
+                              PressedBorderColor: =Self.Fill
+                              PressedColor: =Self.Fill
+                              PressedFill: =Self.Color
+                              RadiusBottomLeft: =0
+                              RadiusBottomRight: =0
+                              RadiusTopLeft: =0
+                              RadiusTopRight: =0
+                              Size: =10
+                              Text: ="Puntaje Continuidad"
+                              Width: =200
+                              X: =headerContinuidadPri.X+headerContinuidadPri.Width
+                        - headerContinuidadPri:
+                            Control: Classic/Button@2.2.0
+                            Properties:
+                              BorderColor: =ColorFade(Self.Fill, -15%)
+                              Color: =RGBA(255, 255, 255, 1)
+                              DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                              Fill: =ColorValue("#1a3a5c")
+                              Font: =Font.'Open Sans'
+                              Height: =34
+                              HoverBorderColor: =ColorFade(Self.BorderColor, 20%)
+                              HoverColor: =RGBA(255, 255, 255, 1)
+                              HoverFill: =ColorFade(RGBA(56, 96, 178, 1), -20%)
+                              PressedBorderColor: =Self.Fill
+                              PressedColor: =Self.Fill
+                              PressedFill: =Self.Color
+                              RadiusBottomLeft: =0
+                              RadiusBottomRight: =0
+                              RadiusTopLeft: =0
+                              RadiusTopRight: =0
+                              Size: =10
+                              Text: ="Continuidad"
+                              Width: =200
+                              X: =headerPuntajeCalidadAguaPri.X+headerPuntajeCalidadAguaPri.Width
+                        - headerPuntajeCalidadAguaPri:
+                            Control: Classic/Button@2.2.0
+                            Properties:
+                              BorderColor: =ColorFade(Self.Fill, -15%)
+                              Color: =RGBA(255, 255, 255, 1)
+                              DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                              Fill: =ColorValue("#1a3a5c")
+                              Font: =Font.'Open Sans'
+                              Height: =34
+                              HoverBorderColor: =ColorFade(Self.BorderColor, 20%)
+                              HoverColor: =RGBA(255, 255, 255, 1)
+                              HoverFill: =ColorFade(RGBA(56, 96, 178, 1), -20%)
+                              PressedBorderColor: =Self.Fill
+                              PressedColor: =Self.Fill
+                              PressedFill: =Self.Color
+                              RadiusBottomLeft: =0
+                              RadiusBottomRight: =0
+                              RadiusTopLeft: =0
+                              RadiusTopRight: =0
+                              Size: =10
+                              Text: ="Puntaje calidad del agua"
+                              Width: =200
+                              X: '=headerCalidaddelAguaPri.X+headerCalidaddelAguaPri.Width '
+                        - headerCalidaddelAguaPri:
+                            Control: Classic/Button@2.2.0
+                            Properties:
+                              BorderColor: =ColorFade(Self.Fill, -15%)
+                              Color: =RGBA(255, 255, 255, 1)
+                              DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                              Fill: =ColorValue("#1a3a5c")
+                              Font: =Font.'Open Sans'
+                              Height: =34
+                              HoverBorderColor: =ColorFade(Self.BorderColor, 20%)
+                              HoverColor: =RGBA(255, 255, 255, 1)
+                              HoverFill: =ColorFade(RGBA(56, 96, 178, 1), -20%)
+                              PressedBorderColor: =Self.Fill
+                              PressedColor: =Self.Fill
+                              PressedFill: =Self.Color
+                              RadiusBottomLeft: =0
+                              RadiusBottomRight: =0
+                              RadiusTopLeft: =0
+                              RadiusTopRight: =0
+                              Size: =10
+                              Text: ="Calidad del agua"
+                              Width: =131
+                              X: =headerComunaPri.X+headerComunaPri.Width
+                        - headerComunaPri:
+                            Control: Classic/Button@2.2.0
+                            Properties:
+                              BorderColor: =ColorFade(Self.Fill, -15%)
+                              Color: =RGBA(255, 255, 255, 1)
+                              DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                              Fill: =ColorValue("#1a3a5c")
+                              Font: =Font.'Open Sans'
+                              Height: =34
+                              HoverBorderColor: =ColorFade(Self.BorderColor, 20%)
+                              HoverColor: =RGBA(255, 255, 255, 1)
+                              HoverFill: =ColorFade(RGBA(56, 96, 178, 1), -20%)
+                              PressedBorderColor: =Self.Fill
+                              PressedColor: =Self.Fill
+                              PressedFill: =Self.Color
+                              RadiusBottomLeft: =0
+                              RadiusBottomRight: =0
+                              RadiusTopLeft: =0
+                              RadiusTopRight: =0
+                              Size: =10
+                              Text: ="Comuna"
+                              Width: =200
+                              X: =headerTipoSistemaPri.X+headerTipoSistemaPri.Width
+                        - headerTipoSistemaPri:
+                            Control: Classic/Button@2.2.0
+                            Properties:
+                              BorderColor: =ColorFade(Self.Fill, -15%)
+                              Color: =RGBA(255, 255, 255, 1)
+                              DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                              Fill: =ColorValue("#1a3a5c")
+                              Font: =Font.'Open Sans'
+                              Height: =34
+                              HoverBorderColor: =ColorFade(Self.BorderColor, 20%)
+                              HoverColor: =RGBA(255, 255, 255, 1)
+                              HoverFill: =ColorFade(RGBA(56, 96, 178, 1), -20%)
+                              PressedBorderColor: =Self.Fill
+                              PressedColor: =Self.Fill
+                              PressedFill: =Self.Color
+                              RadiusBottomLeft: =0
+                              RadiusBottomRight: =0
+                              RadiusTopLeft: =0
+                              RadiusTopRight: =0
+                              Size: =10
+                              Text: ="Tipo de sistema"
+                              Width: =200
+                              X: =headerNombreProyectoPri.X+headerNombreProyectoPri.Width
+                        - headerNombreProyectoPri:
+                            Control: Classic/Button@2.2.0
+                            Properties:
+                              BorderColor: =ColorFade(Self.Fill, -15%)
+                              Color: =RGBA(255, 255, 255, 1)
+                              DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                              Fill: =ColorValue("#1a3a5c")
+                              Font: =Font.'Open Sans'
+                              Height: =34
+                              HoverBorderColor: =ColorFade(Self.BorderColor, 20%)
+                              HoverColor: =RGBA(255, 255, 255, 1)
+                              HoverFill: =ColorFade(RGBA(56, 96, 178, 1), -20%)
+                              PressedBorderColor: =Self.Fill
+                              PressedColor: =Self.Fill
+                              PressedFill: =Self.Color
+                              RadiusBottomLeft: =0
+                              RadiusBottomRight: =0
+                              RadiusTopLeft: =0
+                              RadiusTopRight: =0
+                              Size: =10
+                              Text: ="Nombre del proyecto"
+                              Width: =200
+                              X: =headerPriorizadopor.X+headerPriorizadopor.Width
+                        - headerPriorizadopor:
+                            Control: Classic/Button@2.2.0
+                            Properties:
+                              BorderColor: =ColorFade(Self.Fill, -15%)
+                              Color: =RGBA(255, 255, 255, 1)
+                              DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                              Fill: =ColorValue("#1a3a5c")
+                              Font: =Font.'Open Sans'
+                              Height: =34
+                              HoverBorderColor: =ColorFade(Self.BorderColor, 20%)
+                              HoverColor: =RGBA(255, 255, 255, 1)
+                              HoverFill: =ColorFade(RGBA(56, 96, 178, 1), -20%)
+                              PressedBorderColor: =Self.Fill
+                              PressedColor: =Self.Fill
+                              PressedFill: =Self.Color
+                              RadiusBottomLeft: =0
+                              RadiusBottomRight: =0
+                              RadiusTopLeft: =0
+                              RadiusTopRight: =0
+                              Size: =10
+                              Text: ="Priorizado por"
+                              Width: =200
+                              X: =headerFechadePriorizacion.X+headerFechadePriorizacion.Width
+                        - headerFechadePriorizacion:
+                            Control: Classic/Button@2.2.0
+                            Properties:
+                              BorderColor: =ColorFade(Self.Fill, -15%)
+                              Color: =RGBA(255, 255, 255, 1)
+                              DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                              Fill: =ColorValue("#1a3a5c")
+                              Font: =Font.'Open Sans'
+                              Height: =34
+                              HoverBorderColor: =ColorFade(Self.BorderColor, 20%)
+                              HoverColor: =RGBA(255, 255, 255, 1)
+                              HoverFill: =ColorFade(RGBA(56, 96, 178, 1), -20%)
+                              PressedBorderColor: =Self.Fill
+                              PressedColor: =Self.Fill
+                              PressedFill: =Self.Color
+                              RadiusBottomLeft: =0
+                              RadiusBottomRight: =0
+                              RadiusTopLeft: =0
+                              RadiusTopRight: =0
+                              Size: =10
+                              Text: ="Fecha de priorización"
+                              Width: =273
+                              X: =headerNumeroRadicadoPri.X+headerNumeroRadicadoPri.Width-SliderPri.Value
+                        - headerNumeroRadicadoPri:
+                            Control: Classic/Button@2.2.0
+                            Properties:
+                              BorderColor: =ColorFade(Self.Fill, -15%)
+                              Color: =RGBA(255, 255, 255, 1)
+                              DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                              DisplayMode: =DisplayMode.View
+                              Fill: =ColorValue("#1a3a5c")
+                              Font: =Font.'Open Sans'
+                              Height: =32
+                              HoverBorderColor: =ColorFade(Self.BorderColor, 20%)
+                              HoverColor: =RGBA(255, 255, 255, 1)
+                              HoverFill: =ColorFade(RGBA(56, 96, 178, 1), -20%)
+                              PressedBorderColor: =Self.Fill
+                              PressedColor: =Self.Fill
+                              PressedFill: =Self.Color
+                              RadiusBottomLeft: =0
+                              RadiusBottomRight: =0
+                              RadiusTopLeft: =0
+                              RadiusTopRight: =0
+                              Size: =10
+                              Text: ="Numero radicado entrada"
+                              Width: =240
+                              Y: =2
+      - Container5_2:
+          Control: GroupContainer@1.5.0
+          Variant: AutoLayout
+          Properties:
+            BorderColor: =ColorValue("#dde3ea")
+            Fill: =Color.White
+            Height: =48
+            LayoutAlignItems: =LayoutAlignItems.Center
+            LayoutDirection: =LayoutDirection.Horizontal
+            PaddingBottom: =8
+            PaddingLeft: =8
+            PaddingRight: =8
+            PaddingTop: =8
+            Width: =1136
+            Y: =60
+          Children:
+            - BtnSolicitudes_2:
+                Control: Classic/Button@2.2.0
+                Properties:
+                  BorderColor: =ColorFade(Self.Fill, -15%)
+                  Color: =If(varPestañaActiva="Ciclos del proyecto", ColorValue("#1a3a5c"), ColorValue("#7a8a99"))
+                  DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                  Fill: =Color.Transparent
+                  Font: =Font.'Open Sans'
+                  FontWeight: =If(varPestañaActiva="Ciclos del proyecto", FontWeight.Bold, FontWeight.Normal)
+                  HoverBorderColor: =ColorFade(Self.BorderColor, 20%)
+                  HoverColor: =RGBA(255, 255, 255, 1)
+                  HoverFill: =ColorFade(RGBA(56, 96, 178, 1), -20%)
+                  LayoutMinHeight: =16
+                  LayoutMinWidth: =16
+                  OnSelect: =Set(varPestañaActiva, "Solicitudes"); Navigate(MOD_SOLICITUDES)
+                  PressedBorderColor: =Self.Fill
+                  PressedColor: =Self.Fill
+                  PressedFill: =Self.Color
+                  Size: =11.83
+                  Text: ="Solicitudes"
+            - BtnBProyectos_2:
+                Control: Classic/Button@2.2.0
+                Properties:
+                  BorderColor: =ColorFade(Self.Fill, -15%)
+                  Color: =If(varPestañaActiva="Ciclos del proyecto", ColorValue("#1a3a5c"), ColorValue("#7a8a99"))
+                  DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                  Fill: =Color.Transparent
+                  Font: =Font.'Open Sans'
+                  FontWeight: =If(varPestañaActiva="Ciclos del proyecto", FontWeight.Bold, FontWeight.Normal)
+                  HoverBorderColor: =ColorFade(Self.BorderColor, 20%)
+                  HoverColor: =RGBA(255, 255, 255, 1)
+                  HoverFill: =ColorFade(RGBA(56, 96, 178, 1), -20%)
+                  LayoutMinHeight: =16
+                  LayoutMinWidth: =16
+                  OnSelect: =Set(varPestañaActiva, "BancoProyectos"); Navigate(MOD_BANCOPROYECTOS)
+                  PressedBorderColor: =Self.Fill
+                  PressedColor: =Self.Fill
+                  PressedFill: =Self.Color
+                  Size: =11.83
+                  Text: ="Banco de Proyectos"
+            - BtnSGProyectos_2:
+                Control: Classic/Button@2.2.0
+                Properties:
+                  BorderColor: =ColorFade(Self.Fill, -15%)
+                  Color: =If(varPestañaActiva="Ciclos", ColorValue("#1a3a5c"), ColorValue("#7a8a99"))
+                  DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                  Fill: =Color.Transparent
+                  Font: =Font.'Open Sans'
+                  FontWeight: =If(varPestañaActiva="Ciclos del proyecto", FontWeight.Bold, FontWeight.Normal)
+                  HoverBorderColor: =ColorFade(Self.BorderColor, 20%)
+                  HoverColor: =RGBA(255, 255, 255, 1)
+                  HoverFill: =ColorFade(RGBA(56, 96, 178, 1), -20%)
+                  LayoutMinHeight: =16
+                  LayoutMinWidth: =16
+                  OnSelect: =Set(varPestañaActiva, "SGProyectos"); Navigate(MOD_SGPROYECTOS)
+                  PressedBorderColor: =Self.Fill
+                  PressedColor: =Self.Fill
+                  PressedFill: =Self.Color
+                  Size: =11.83
+                  Text: ="Sistema de Gestión de Proyectos"
+            - BtnRProyectos_2:
+                Control: Classic/Button@2.2.0
+                Properties:
+                  BorderColor: =ColorFade(Self.Fill, -15%)
+                  Color: =If(varPestañaActiva="Ciclos del proyecto", ColorValue("#1a3a5c"), ColorValue("#7a8a99"))
+                  DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                  Fill: =Color.Transparent
+                  Font: =Font.'Open Sans'
+                  FontWeight: =If(varPestañaActiva="Ciclos del proyecto", FontWeight.Bold, FontWeight.Normal)
+                  HoverBorderColor: =ColorFade(Self.BorderColor, 20%)
+                  HoverColor: =RGBA(255, 255, 255, 1)
+                  HoverFill: =ColorFade(RGBA(56, 96, 178, 1), -20%)
+                  LayoutMinHeight: =16
+                  LayoutMinWidth: =16
+                  OnSelect: =Set(varPestañaActiva, "RepositorioProyectos"); Navigate(MOD_RPROYECTOS)
+                  PressedBorderColor: =Self.Fill
+                  PressedColor: =Self.Fill
+                  PressedFill: =Self.Color
+                  Size: =11.83
+                  Text: ="Repositorio de proyectos"
+      - Comp_Encabezado_3:
+          Control: CanvasComponent
+          ComponentName: Comp_Encabezado
+          Properties:
+            Height: =60
+            PestañaActiva: ="Texto"
+            Width: =App.Width
+      - LineaRProyectos_2:
+          Control: Rectangle@2.3.0
+          Properties:
+            BorderColor: =RGBA(0, 18, 107, 1)
+            Fill: =If(varPestañaActiva="RepositorioProyectos", ColorValue("#1a3a5c"), Color.Transparent)
+            Height: =2
+            Width: =BtnSolicitudes.Width
+            X: =BtnRProyectos.X
+            Y: =Container5.Y + Container5.Height - 2
+      - LineaSGProyectos_2:
+          Control: Rectangle@2.3.0
+          Properties:
+            BorderColor: =RGBA(0, 18, 107, 1)
+            Fill: =If(varPestañaActiva="SGProyectos", ColorValue("#1a3a5c"), Color.Transparent)
+            Height: =2
+            Width: =BtnSGProyectos.Width
+            X: =BtnSGProyectos.X
+            Y: =Container5.Y + Container5.Height - 2
+      - LineaBProyectos_2:
+          Control: Rectangle@2.3.0
+          Properties:
+            BorderColor: =RGBA(0, 18, 107, 1)
+            Fill: =If(varPestañaActiva="BancoProyectos", ColorValue("#1a3a5c"), Color.Transparent)
+            Height: =2
+            Width: =BtnSolicitudes.Width
+            X: =BtnBProyectos.X
+            Y: =Container5.Y + Container5.Height - 2
+      - LineaSolicitudes_2:
+          Control: Rectangle@2.3.0
+          Properties:
+            BorderColor: =RGBA(0, 18, 107, 1)
+            Fill: =If(varPestañaActiva="Solicitudes", ColorValue("#1a3a5c"), Color.Transparent)
+            Height: =2
+            Width: =BtnSolicitudes.Width
+            X: =BtnSolicitudes.X
+            Y: =Container5.Y + Container5.Height - 2
+      - SliderPri:
+          Control: Classic/Slider@2.1.0
+          Properties:
+            BorderColor: =RGBA(0, 18, 107, 1)
+            Default: =0
+            HandleFill: =RGBA(0, 18, 107, 1)
+            HandleSize: =20
+            Height: =32
+            Max: =7000
+            ValueFill: =RGBA(0, 18, 107, 1)
+            Width: =300
+            X: =418
+            Y: =608

@@ -1,0 +1,485 @@
+# ************************************************************************************************
+# Warning: YAML source code for Canvas Apps should only be used to review changes made within Power Apps Studio and for minor edits (Preview).
+# Use the maker portal to create and edit your Power Apps.
+# 
+# The schema file for Canvas Apps is available at https://go.microsoft.com/fwlink/?linkid=2304907
+# 
+# For more information, visit https://go.microsoft.com/fwlink/?linkid=2292623
+# ************************************************************************************************
+Screens:
+  Pro-AspectosGeneralesPro:
+    Properties:
+      LoadingSpinnerColor: =RGBA(56, 96, 178, 1)
+    Children:
+      - Containermain24:
+          Control: GroupContainer@1.5.0
+          Variant: ManualLayout
+          Properties:
+            Height: =470
+            Width: =1136
+            Y: =120
+          Children:
+            - Container1_6:
+                Control: GroupContainer@1.5.0
+                Variant: AutoLayout
+                Properties:
+                  Fill: =ColorValue("#1a3a5c")
+                  Height: =45.07
+                  LayoutAlignItems: =LayoutAlignItems.Stretch
+                  LayoutDirection: =LayoutDirection.Horizontal
+                  PaddingBottom: =4.51
+                  PaddingLeft: =4.51
+                  PaddingRight: =8
+                  PaddingTop: =8
+                  Width: =Parent.Width
+                Children:
+                  - Label3_6:
+                      Control: Label@2.5.1
+                      Properties:
+                        BorderColor: =RGBA(0, 18, 107, 1)
+                        Color: =RGBA(255, 255, 255, 1)
+                        FillPortions: =1
+                        Font: =Font.'Open Sans'
+                        FontWeight: =FontWeight.Bold
+                        Height: =39.44
+                        LayoutMinHeight: =16
+                        LayoutMinWidth: =16
+                        PaddingBottom: =2.82
+                        PaddingLeft: =2.82
+                        Size: =11.83
+                        Text: ="Aspectos Generales del Proyecto"
+            - FormAspectosGeneralesPro:
+                Control: Form@2.4.4
+                Variant: Classic
+                Layout: Vertical
+                Properties:
+                  BorderColor: =RGBA(0, 18, 107, 1)
+                  DataSource: =RepositorioProyectos
+                  DefaultMode: =varFormMode1
+                  Height: =425
+                  Item: |-
+                    =IfError(
+                        If(
+                            IsBlank(varFormDataPro) || IsBlank(varFormDataPro.ID),
+                            Defaults(RepositorioProyectos),
+                            varFormDataPro
+                        ),
+                        Defaults(RepositorioProyectos)
+                    )
+                  Width: =Parent.Width
+                  Y: =45
+                Children:
+                  - Número de contrato_DataCard1:
+                      Control: TypedDataCard@1.0.7
+                      Variant: ClassicTextualEdit
+                      IsLocked: true
+                      Properties:
+                        BorderColor: =RGBA(0, 18, 107, 1)
+                        DataField: ="field_13"
+                        Default: =ThisItem.'Número de contrato'
+                        DisplayName: =DataSourceInfo([@RepositorioProyectos],DataSourceInfo.DisplayName,'Número de contrato')
+                        MaxLength: =DataSourceInfo([@RepositorioProyectos], DataSourceInfo.MaxLength, 'Número de contrato')
+                        Required: =false
+                        Update: =DataCardValue50.Text
+                        Width: =1136
+                        X: =0
+                        Y: =0
+                      Children:
+                        - DataCardKey51:
+                            Control: Label@2.5.1
+                            MetadataKey: FieldName
+                            Properties:
+                              AutoHeight: =true
+                              BorderColor: =RGBA(0, 0, 0, 1)
+                              Color: =RGBA(0, 18, 107, 1)
+                              Font: =Font.'Open Sans'
+                              Height: =48
+                              Text: =Parent.DisplayName
+                              Width: =Parent.Width - 60
+                              Wrap: =false
+                              X: =30
+                              Y: =10
+                        - DataCardValue50:
+                            Control: Classic/TextInput@2.3.2
+                            MetadataKey: FieldValue
+                            Properties:
+                              BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                              Default: =Parent.Default
+                              DelayOutput: =true
+                              DisplayMode: =Parent.DisplayMode
+                              Font: =Font.'Open Sans'
+                              HoverBorderColor: =RGBA(0, 18, 107, 1)
+                              HoverFill: =RGBA(186, 202, 226, 1)
+                              MaxLength: =Parent.MaxLength
+                              PaddingLeft: =5
+                              RadiusBottomLeft: =0
+                              RadiusBottomRight: =0
+                              RadiusTopLeft: =0
+                              RadiusTopRight: =0
+                              Tooltip: =Parent.DisplayName
+                              Width: =Parent.Width - 60
+                              X: =30
+                              Y: =DataCardKey51.Y + DataCardKey51.Height + 5
+                        - ErrorMessage49:
+                            Control: Label@2.5.1
+                            MetadataKey: ErrorMessage
+                            Properties:
+                              AutoHeight: =true
+                              BorderColor: =RGBA(0, 0, 0, 1)
+                              Color: =RGBA(168, 0, 0, 1)
+                              Font: =Font.'Open Sans'
+                              FontWeight: =FontWeight.Semibold
+                              Height: =10
+                              Live: =Live.Assertive
+                              PaddingBottom: =0
+                              PaddingLeft: =0
+                              PaddingRight: =0
+                              PaddingTop: =0
+                              Size: =24
+                              Text: =Parent.Error
+                              Visible: =Parent.DisplayMode=DisplayMode.Edit
+                              Width: =Parent.Width - 60
+                              X: =30
+                              Y: =DataCardValue50.Y + DataCardValue50.Height
+                        - StarVisible49:
+                            Control: Label@2.5.1
+                            MetadataKey: FieldRequired
+                            Properties:
+                              Align: =Align.Center
+                              BorderColor: =RGBA(0, 0, 0, 1)
+                              Color: =RGBA(0, 18, 107, 1)
+                              Font: =Font.'Open Sans'
+                              Height: =DataCardKey51.Height
+                              Text: ="*"
+                              Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                              Width: =30
+                              Wrap: =false
+                              Y: =DataCardKey51.Y
+                  - Contratista_DataCard1:
+                      Control: TypedDataCard@1.0.7
+                      Variant: ClassicTextualEdit
+                      IsLocked: true
+                      Properties:
+                        BorderColor: =RGBA(0, 18, 107, 1)
+                        DataField: ="field_14"
+                        Default: =ThisItem.Contratista
+                        DisplayName: =DataSourceInfo([@RepositorioProyectos],DataSourceInfo.DisplayName,Contratista)
+                        MaxLength: =DataSourceInfo([@RepositorioProyectos], DataSourceInfo.MaxLength, Contratista)
+                        Required: =false
+                        Update: =DataCardValue45.Text
+                        Width: =1136
+                        X: =0
+                        Y: =1
+                      Children:
+                        - DataCardKey46:
+                            Control: Label@2.5.1
+                            MetadataKey: FieldName
+                            Properties:
+                              AutoHeight: =true
+                              BorderColor: =RGBA(0, 0, 0, 1)
+                              Color: =RGBA(0, 18, 107, 1)
+                              Font: =Font.'Open Sans'
+                              Height: =48
+                              Text: =Parent.DisplayName
+                              Width: =Parent.Width - 60
+                              Wrap: =false
+                              X: =30
+                              Y: =10
+                        - DataCardValue45:
+                            Control: Classic/TextInput@2.3.2
+                            MetadataKey: FieldValue
+                            Properties:
+                              BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                              Default: =Parent.Default
+                              DelayOutput: =true
+                              DisplayMode: =Parent.DisplayMode
+                              Font: =Font.'Open Sans'
+                              HoverBorderColor: =RGBA(0, 18, 107, 1)
+                              HoverFill: =RGBA(186, 202, 226, 1)
+                              MaxLength: =Parent.MaxLength
+                              PaddingLeft: =5
+                              RadiusBottomLeft: =0
+                              RadiusBottomRight: =0
+                              RadiusTopLeft: =0
+                              RadiusTopRight: =0
+                              Tooltip: =Parent.DisplayName
+                              Width: =Parent.Width - 60
+                              X: =30
+                              Y: =DataCardKey46.Y + DataCardKey46.Height + 5
+                        - ErrorMessage45:
+                            Control: Label@2.5.1
+                            MetadataKey: ErrorMessage
+                            Properties:
+                              AutoHeight: =true
+                              BorderColor: =RGBA(0, 0, 0, 1)
+                              Color: =RGBA(168, 0, 0, 1)
+                              Font: =Font.'Open Sans'
+                              FontWeight: =FontWeight.Semibold
+                              Height: =10
+                              Live: =Live.Assertive
+                              PaddingBottom: =0
+                              PaddingLeft: =0
+                              PaddingRight: =0
+                              PaddingTop: =0
+                              Size: =24
+                              Text: =Parent.Error
+                              Visible: =Parent.DisplayMode=DisplayMode.Edit
+                              Width: =Parent.Width - 60
+                              X: =30
+                              Y: =DataCardValue45.Y + DataCardValue45.Height
+                        - StarVisible45:
+                            Control: Label@2.5.1
+                            MetadataKey: FieldRequired
+                            Properties:
+                              Align: =Align.Center
+                              BorderColor: =RGBA(0, 0, 0, 1)
+                              Color: =RGBA(0, 18, 107, 1)
+                              Font: =Font.'Open Sans'
+                              Height: =DataCardKey46.Height
+                              Text: ="*"
+                              Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                              Width: =30
+                              Wrap: =false
+                              Y: =DataCardKey46.Y
+                  - Fecha firma contrato_DataCard1:
+                      Control: TypedDataCard@1.0.7
+                      Variant: ClassicDateEdit
+                      IsLocked: true
+                      Properties:
+                        BorderColor: =RGBA(0, 18, 107, 1)
+                        DataField: ="field_15"
+                        Default: =ThisItem.'Fecha firma contrato'
+                        DisplayName: =DataSourceInfo([@RepositorioProyectos],DataSourceInfo.DisplayName,'Fecha firma contrato')
+                        Required: =false
+                        Update: =DataCardValue53.SelectedDate
+                        Width: =1136
+                        X: =0
+                        Y: =2
+                      Children:
+                        - DataCardKey54:
+                            Control: Label@2.5.1
+                            MetadataKey: FieldName
+                            Properties:
+                              AutoHeight: =true
+                              BorderColor: =RGBA(0, 0, 0, 1)
+                              Color: =RGBA(0, 18, 107, 1)
+                              Font: =Font.'Open Sans'
+                              Height: =48
+                              Text: =Parent.DisplayName
+                              Width: =Parent.Width - 60
+                              Wrap: =false
+                              X: =30
+                              Y: =10
+                        - DataCardValue53:
+                            Control: Classic/DatePicker@2.6.0
+                            MetadataKey: FieldValue
+                            Properties:
+                              BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                              DefaultDate: =Parent.Default
+                              DisplayMode: =Parent.DisplayMode
+                              EndYear: =Year(Today())+100
+                              Font: =Font.'Open Sans'
+                              IconBackground: =RGBA(56, 96, 178, 1)
+                              IconFill: =RGBA(255, 255, 255, 1)
+                              IsEditable: =true
+                              PaddingBottom: =0
+                              PaddingLeft: =If(Self.DisplayMode = DisplayMode.Edit, 5, 0)
+                              StartYear: =1899
+                              Tooltip: =Parent.DisplayName
+                              Width: =Parent.Width - 60
+                              X: =30
+                              Y: =DataCardKey54.Y + DataCardKey54.Height + 5
+                        - ErrorMessage52:
+                            Control: Label@2.5.1
+                            MetadataKey: ErrorMessage
+                            Properties:
+                              AutoHeight: =true
+                              BorderColor: =RGBA(0, 0, 0, 1)
+                              Color: =RGBA(168, 0, 0, 1)
+                              Font: =Font.'Open Sans'
+                              FontWeight: =FontWeight.Semibold
+                              Height: =10
+                              Live: =Live.Assertive
+                              PaddingBottom: =0
+                              PaddingLeft: =0
+                              PaddingRight: =0
+                              PaddingTop: =0
+                              Size: =24
+                              Text: =Parent.Error
+                              Visible: =Parent.DisplayMode=DisplayMode.Edit
+                              Width: =Parent.Width - 60
+                              X: =30
+                              Y: =DataCardValue53.Y + DataCardValue53.Height
+                        - StarVisible52:
+                            Control: Label@2.5.1
+                            MetadataKey: FieldRequired
+                            Properties:
+                              Align: =Align.Center
+                              BorderColor: =RGBA(0, 0, 0, 1)
+                              Color: =RGBA(0, 18, 107, 1)
+                              Font: =Font.'Open Sans'
+                              Height: =DataCardKey54.Height
+                              Text: ="*"
+                              Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                              Width: =30
+                              Wrap: =false
+                              Y: =DataCardKey54.Y
+      - Icon4_1:
+          Control: Classic/Icon@2.5.0
+          Properties:
+            BorderColor: =RGBA(0, 18, 107, 1)
+            Color: =RGBA(0, 18, 107, 1)
+            Height: =36.06
+            Icon: =Icon.BackArrow
+            OnSelect: =Back()
+            X: =485
+            Y: =600
+      - Siguiente_3:
+          Control: Classic/Icon@2.5.0
+          Properties:
+            BorderColor: =RGBA(0, 18, 107, 1)
+            Color: =RGBA(0, 18, 107, 1)
+            Height: =36.06
+            Icon: =Icon.NextArrow
+            OnSelect: =Navigate('Pro-FasesdelProyecto')
+            X: =578
+            Y: =600
+      - Comp_Encabezado_14:
+          Control: CanvasComponent
+          ComponentName: Comp_Encabezado
+          Properties:
+            Height: =60
+            PestañaActiva: ="Texto"
+            Width: =App.Width
+      - ContainerBotones_5:
+          Control: GroupContainer@1.5.0
+          Variant: AutoLayout
+          Properties:
+            BorderColor: =ColorValue("#dde3ea")
+            Fill: =Color.White
+            Height: =48
+            LayoutAlignItems: =LayoutAlignItems.Center
+            LayoutDirection: =LayoutDirection.Horizontal
+            PaddingBottom: =8
+            PaddingLeft: =8
+            PaddingRight: =8
+            PaddingTop: =8
+            Width: =1136
+            Y: =60
+          Children:
+            - BtnSolicitudes_13:
+                Control: Classic/Button@2.2.0
+                Properties:
+                  BorderColor: =ColorFade(Self.Fill, -15%)
+                  Color: =If(varPestañaActiva="Ciclos del proyecto", ColorValue("#1a3a5c"), ColorValue("#7a8a99"))
+                  DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                  Fill: =Color.Transparent
+                  Font: =Font.'Open Sans'
+                  FontWeight: =If(varPestañaActiva="Ciclos del proyecto", FontWeight.Bold, FontWeight.Normal)
+                  HoverBorderColor: =ColorFade(Self.BorderColor, 20%)
+                  HoverColor: =RGBA(255, 255, 255, 1)
+                  HoverFill: =ColorFade(RGBA(56, 96, 178, 1), -20%)
+                  LayoutMinHeight: =16
+                  LayoutMinWidth: =16
+                  OnSelect: =Set(varPestañaActiva, "Solicitudes"); Navigate(MOD_SOLICITUDES)
+                  PressedBorderColor: =Self.Fill
+                  PressedColor: =Self.Fill
+                  PressedFill: =Self.Color
+                  Size: =11.83
+                  Text: ="Solicitudes"
+            - BtnBProyectos_13:
+                Control: Classic/Button@2.2.0
+                Properties:
+                  BorderColor: =ColorFade(Self.Fill, -15%)
+                  Color: =If(varPestañaActiva="Ciclos del proyecto", ColorValue("#1a3a5c"), ColorValue("#7a8a99"))
+                  DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                  Fill: =Color.Transparent
+                  Font: =Font.'Open Sans'
+                  FontWeight: =If(varPestañaActiva="Ciclos del proyecto", FontWeight.Bold, FontWeight.Normal)
+                  HoverBorderColor: =ColorFade(Self.BorderColor, 20%)
+                  HoverColor: =RGBA(255, 255, 255, 1)
+                  HoverFill: =ColorFade(RGBA(56, 96, 178, 1), -20%)
+                  LayoutMinHeight: =16
+                  LayoutMinWidth: =16
+                  OnSelect: =Set(varPestañaActiva, "BancoProyectos"); Navigate(MOD_BANCOPROYECTOS)
+                  PressedBorderColor: =Self.Fill
+                  PressedColor: =Self.Fill
+                  PressedFill: =Self.Color
+                  Size: =11.83
+                  Text: ="Banco de Proyectos"
+            - BtnSGProyectos_13:
+                Control: Classic/Button@2.2.0
+                Properties:
+                  BorderColor: =ColorFade(Self.Fill, -15%)
+                  Color: =If(varPestañaActiva="Ciclos", ColorValue("#1a3a5c"), ColorValue("#7a8a99"))
+                  DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                  Fill: =Color.Transparent
+                  Font: =Font.'Open Sans'
+                  FontWeight: =If(varPestañaActiva="Ciclos del proyecto", FontWeight.Bold, FontWeight.Normal)
+                  HoverBorderColor: =ColorFade(Self.BorderColor, 20%)
+                  HoverColor: =RGBA(255, 255, 255, 1)
+                  HoverFill: =ColorFade(RGBA(56, 96, 178, 1), -20%)
+                  LayoutMinHeight: =16
+                  LayoutMinWidth: =16
+                  OnSelect: =Set(varPestañaActiva, "SGProyectos"); Navigate(MOD_SGPROYECTOS)
+                  PressedBorderColor: =Self.Fill
+                  PressedColor: =Self.Fill
+                  PressedFill: =Self.Color
+                  Size: =11.83
+                  Text: ="Sistema de Gestión de Proyectos"
+            - BtnRProyectos_13:
+                Control: Classic/Button@2.2.0
+                Properties:
+                  BorderColor: =ColorFade(Self.Fill, -15%)
+                  Color: =If(varPestañaActiva="Ciclos del proyecto", ColorValue("#1a3a5c"), ColorValue("#7a8a99"))
+                  DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                  Fill: =Color.Transparent
+                  Font: =Font.'Open Sans'
+                  FontWeight: =If(varPestañaActiva="Ciclos del proyecto", FontWeight.Bold, FontWeight.Normal)
+                  HoverBorderColor: =ColorFade(Self.BorderColor, 20%)
+                  HoverColor: =RGBA(255, 255, 255, 1)
+                  HoverFill: =ColorFade(RGBA(56, 96, 178, 1), -20%)
+                  LayoutMinHeight: =16
+                  LayoutMinWidth: =16
+                  OnSelect: =Set(varPestañaActiva, "RepositorioProyectos"); Navigate(MOD_RPROYECTOS)
+                  PressedBorderColor: =Self.Fill
+                  PressedColor: =Self.Fill
+                  PressedFill: =Self.Color
+                  Size: =11.83
+                  Text: ="Repositorio de proyectos"
+      - LineaRProyectos_13:
+          Control: Rectangle@2.3.0
+          Properties:
+            BorderColor: =RGBA(0, 18, 107, 1)
+            Fill: =If(varPestañaActiva="RepositorioProyectos", ColorValue("#1a3a5c"), Color.Transparent)
+            Height: =2
+            Width: =BtnSolicitudes.Width
+            X: =BtnRProyectos.X
+            Y: =Container5.Y + Container5.Height - 2
+      - LineaSGProyectos_13:
+          Control: Rectangle@2.3.0
+          Properties:
+            BorderColor: =RGBA(0, 18, 107, 1)
+            Fill: =If(varPestañaActiva="SGProyectos", ColorValue("#1a3a5c"), Color.Transparent)
+            Height: =2
+            Width: =BtnSGProyectos.Width
+            X: =BtnSGProyectos.X
+            Y: =Container5.Y + Container5.Height - 2
+      - LineaBProyectos_13:
+          Control: Rectangle@2.3.0
+          Properties:
+            BorderColor: =RGBA(0, 18, 107, 1)
+            Fill: =If(varPestañaActiva="BancoProyectos", ColorValue("#1a3a5c"), Color.Transparent)
+            Height: =2
+            Width: =BtnSolicitudes.Width
+            X: =BtnBProyectos.X
+            Y: =Container5.Y + Container5.Height - 2
+      - LineaSolicitudes_13:
+          Control: Rectangle@2.3.0
+          Properties:
+            BorderColor: =RGBA(0, 18, 107, 1)
+            Fill: =If(varPestañaActiva="Solicitudes", ColorValue("#1a3a5c"), Color.Transparent)
+            Height: =2
+            Width: =BtnSolicitudes.Width
+            X: =BtnSolicitudes.X
+            Y: =Container5.Y + Container5.Height - 2

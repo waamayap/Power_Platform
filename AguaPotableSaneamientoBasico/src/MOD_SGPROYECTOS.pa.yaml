@@ -1,0 +1,721 @@
+# ************************************************************************************************
+# Warning: YAML source code for Canvas Apps should only be used to review changes made within Power Apps Studio and for minor edits (Preview).
+# Use the maker portal to create and edit your Power Apps.
+# 
+# The schema file for Canvas Apps is available at https://go.microsoft.com/fwlink/?linkid=2304907
+# 
+# For more information, visit https://go.microsoft.com/fwlink/?linkid=2292623
+# ************************************************************************************************
+Screens:
+  MOD_SGPROYECTOS:
+    Properties:
+      LoadingSpinnerColor: =RGBA(56, 96, 178, 1)
+      OnVisible: |-
+        =Set(varPestañaActiva, "SGProyectos");
+        Set(varComuna, "Todas las comunas");
+        Set(varFase, "Todas las fases");
+        Set(varEstado, "Todos los estados");
+        ClearCollect(colComunasFiltro, Distinct(colProyectos, Comuna));
+        ClearCollect(colFasesFiltro, Distinct(colProyectos, FaseCalculada));
+        ClearCollect(colEstadosFiltro, Distinct(colProyectos, EstadoCalculado))
+    Children:
+      - Container5:
+          Control: GroupContainer@1.5.0
+          Variant: AutoLayout
+          Properties:
+            BorderColor: =ColorValue("#dde3ea")
+            Fill: =Color.White
+            Height: =48
+            LayoutAlignItems: =LayoutAlignItems.Center
+            LayoutDirection: =LayoutDirection.Horizontal
+            PaddingBottom: =8
+            PaddingLeft: =8
+            PaddingRight: =8
+            PaddingTop: =8
+            Width: =1136
+            Y: =60
+          Children:
+            - BtnSolicitudes:
+                Control: Classic/Button@2.2.0
+                Properties:
+                  BorderColor: =ColorFade(Self.Fill, -15%)
+                  Color: =If(varPestañaActiva="Ciclos del proyecto", ColorValue("#1a3a5c"), ColorValue("#7a8a99"))
+                  DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                  Fill: =Color.Transparent
+                  Font: =Font.'Open Sans'
+                  FontWeight: =If(varPestañaActiva="Ciclos del proyecto", FontWeight.Bold, FontWeight.Normal)
+                  HoverBorderColor: =ColorFade(Self.BorderColor, 20%)
+                  HoverColor: =RGBA(255, 255, 255, 1)
+                  HoverFill: =ColorFade(RGBA(56, 96, 178, 1), -20%)
+                  LayoutMinHeight: =16
+                  LayoutMinWidth: =16
+                  OnSelect: =Set(varPestañaActiva, "Solicitudes"); Navigate(MOD_SOLICITUDES)
+                  PressedBorderColor: =Self.Fill
+                  PressedColor: =Self.Fill
+                  PressedFill: =Self.Color
+                  Size: =11.83
+                  Text: ="Solicitudes"
+            - BtnBProyectos:
+                Control: Classic/Button@2.2.0
+                Properties:
+                  BorderColor: =ColorFade(Self.Fill, -15%)
+                  Color: =If(varPestañaActiva="Ciclos del proyecto", ColorValue("#1a3a5c"), ColorValue("#7a8a99"))
+                  DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                  Fill: =Color.Transparent
+                  Font: =Font.'Open Sans'
+                  FontWeight: =If(varPestañaActiva="Ciclos del proyecto", FontWeight.Bold, FontWeight.Normal)
+                  HoverBorderColor: =ColorFade(Self.BorderColor, 20%)
+                  HoverColor: =RGBA(255, 255, 255, 1)
+                  HoverFill: =ColorFade(RGBA(56, 96, 178, 1), -20%)
+                  LayoutMinHeight: =16
+                  LayoutMinWidth: =16
+                  OnSelect: =Set(varPestañaActiva, "BancoProyectos"); Navigate(MOD_BANCOPROYECTOS)
+                  PressedBorderColor: =Self.Fill
+                  PressedColor: =Self.Fill
+                  PressedFill: =Self.Color
+                  Size: =11.83
+                  Text: ="Banco de Proyectos"
+            - BtnSGProyectos:
+                Control: Classic/Button@2.2.0
+                Properties:
+                  BorderColor: =ColorFade(Self.Fill, -15%)
+                  Color: =If(varPestañaActiva="Ciclos", ColorValue("#1a3a5c"), ColorValue("#7a8a99"))
+                  DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                  Fill: =Color.Transparent
+                  Font: =Font.'Open Sans'
+                  FontWeight: =If(varPestañaActiva="Ciclos del proyecto", FontWeight.Bold, FontWeight.Normal)
+                  HoverBorderColor: =ColorFade(Self.BorderColor, 20%)
+                  HoverColor: =RGBA(255, 255, 255, 1)
+                  HoverFill: =ColorFade(RGBA(56, 96, 178, 1), -20%)
+                  LayoutMinHeight: =16
+                  LayoutMinWidth: =16
+                  OnSelect: =Set(varPestañaActiva, "SGProyectos"); Navigate(MOD_SGPROYECTOS)
+                  PressedBorderColor: =Self.Fill
+                  PressedColor: =Self.Fill
+                  PressedFill: =Self.Color
+                  Size: =11.83
+                  Text: ="Sistema de Gestión de Proyectos"
+            - BtnRProyectos:
+                Control: Classic/Button@2.2.0
+                Properties:
+                  BorderColor: =ColorFade(Self.Fill, -15%)
+                  Color: =If(varPestañaActiva="Ciclos del proyecto", ColorValue("#1a3a5c"), ColorValue("#7a8a99"))
+                  DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                  Fill: =Color.Transparent
+                  Font: =Font.'Open Sans'
+                  FontWeight: =If(varPestañaActiva="Ciclos del proyecto", FontWeight.Bold, FontWeight.Normal)
+                  HoverBorderColor: =ColorFade(Self.BorderColor, 20%)
+                  HoverColor: =RGBA(255, 255, 255, 1)
+                  HoverFill: =ColorFade(RGBA(56, 96, 178, 1), -20%)
+                  LayoutMinHeight: =16
+                  LayoutMinWidth: =16
+                  OnSelect: =Set(varPestañaActiva, "RepositorioProyectos"); Navigate(MOD_RPROYECTOS)
+                  PressedBorderColor: =Self.Fill
+                  PressedColor: =Self.Fill
+                  PressedFill: =Self.Color
+                  Size: =11.83
+                  Text: ="Repositorio de proyectos"
+      - Comp_Encabezado_1:
+          Control: CanvasComponent
+          ComponentName: Comp_Encabezado
+          Properties:
+            Height: =60
+            PestañaActiva: ="Texto"
+            Width: =App.Width
+      - LineaRProyectos:
+          Control: Rectangle@2.3.0
+          Properties:
+            BorderColor: =RGBA(0, 18, 107, 1)
+            Fill: =If(varPestañaActiva="RepositorioProyectos", ColorValue("#1a3a5c"), Color.Transparent)
+            Height: =2
+            OnSelect: =
+            Width: =BtnSolicitudes.Width
+            X: =BtnRProyectos.X
+            Y: =Container5.Y + Container5.Height - 2
+      - LineaSGProyectos:
+          Control: Rectangle@2.3.0
+          Properties:
+            BorderColor: =RGBA(0, 18, 107, 1)
+            Fill: =If(varPestañaActiva="SGProyectos", ColorValue("#1a3a5c"), Color.Transparent)
+            Height: =2
+            Width: =BtnSGProyectos.Width
+            X: =BtnSGProyectos.X
+            Y: =Container5.Y + Container5.Height - 2
+      - LineaBProyectos:
+          Control: Rectangle@2.3.0
+          Properties:
+            BorderColor: =RGBA(0, 18, 107, 1)
+            Fill: =If(varPestañaActiva="BancoProyectos", ColorValue("#1a3a5c"), Color.Transparent)
+            Height: =2
+            Width: =BtnSolicitudes.Width
+            X: =BtnBProyectos.X
+            Y: =Container5.Y + Container5.Height - 2
+      - LineaSolicitudes:
+          Control: Rectangle@2.3.0
+          Properties:
+            BorderColor: =RGBA(0, 18, 107, 1)
+            Fill: =If(varPestañaActiva="Solicitudes", ColorValue("#1a3a5c"), Color.Transparent)
+            Height: =2
+            Width: =BtnSolicitudes.Width
+            X: =BtnSolicitudes.X
+            Y: =Container5.Y + Container5.Height - 2
+      - RectMetrica1:
+          Control: Classic/Button@2.2.0
+          Properties:
+            BorderColor: =ColorValue("#dde3ea")
+            BorderThickness: =1
+            Color: =RGBA(255, 255, 255, 1)
+            DisabledBorderColor: =RGBA(166, 166, 166, 1)
+            Fill: =Color.White
+            Font: =Font.'Open Sans'
+            Height: =90
+            HoverBorderColor: =ColorFade(Self.BorderColor, 20%)
+            HoverColor: =RGBA(255, 255, 255, 1)
+            HoverFill: =Color.White
+            PressedBorderColor: =Self.Fill
+            PressedColor: =Self.Fill
+            PressedFill: =Color.White
+            Text: =""
+            Width: =(Parent.Width - 80) / 3
+            X: =24
+            Y: =Container2_2.Y + Container2_2.Height + 12
+      - LblM1Label:
+          Control: Label@2.5.1
+          Properties:
+            BorderColor: =RGBA(0, 18, 107, 1)
+            Color: =ColorValue("#7a8a99")
+            Fill: =Color.Transparent
+            Font: =Font.'Open Sans'
+            Height: =18
+            Size: =10
+            Text: ="Total Proyectos"
+            Width: =RectMetrica1.Width - 28
+            X: =RectMetrica1.X + 14
+            Y: =RectMetrica1.Y + 12
+      - LblM1Valor:
+          Control: Label@2.5.1
+          Properties:
+            BorderColor: =RGBA(0, 18, 107, 1)
+            Color: =ColorValue("#1a3a5c")
+            Fill: =Color.Transparent
+            Font: =Font.'Open Sans'
+            FontWeight: =FontWeight.Bold
+            Height: =34
+            Size: =24
+            Text: =CountRows(RepositorioProyectos)
+            Width: =RectMetrica1.Width - 28
+            X: =RectMetrica1.X + 14
+            Y: =LblM1Label.Y + 20
+      - LblM1Trend:
+          Control: Label@2.5.1
+          Properties:
+            BorderColor: =RGBA(0, 18, 107, 1)
+            Color: =ColorValue("#3b6d11")
+            Fill: =Color.Transparent
+            Font: =Font.'Open Sans'
+            Height: =18
+            Size: =10
+            Text: ="↑ " & Text(CountRows(Filter(Solicitudes, 'Fecha de radicado' >= DateAdd(Today(), -7, TimeUnit.Days)))) & " nuevas esta semana"
+            Width: =RectMetrica1.Width - 28
+            X: =RectMetrica1.X + 14
+            Y: =LblM1Valor.Y + 36
+      - RectMetrica2:
+          Control: Classic/Button@2.2.0
+          Properties:
+            BorderColor: =ColorValue("#dde3ea")
+            BorderThickness: =1
+            Color: =RGBA(255, 255, 255, 1)
+            DisabledBorderColor: =RGBA(166, 166, 166, 1)
+            Fill: =Color.White
+            Font: =Font.'Open Sans'
+            Height: =90
+            HoverBorderColor: =ColorFade(Self.BorderColor, 20%)
+            HoverColor: =RGBA(255, 255, 255, 1)
+            HoverFill: =Color.White
+            PressedBorderColor: =Self.Fill
+            PressedColor: =Self.Fill
+            PressedFill: =Color.White
+            Text: ="En priorización"
+            Width: =(Parent.Width - 80) / 3
+            X: =RectMetrica1.X + RectMetrica1.Width + 16
+            Y: =Container2_2.Y + Container2_2.Height + 12
+      - LblM1Label_1:
+          Control: Label@2.5.1
+          Properties:
+            BorderColor: =RGBA(0, 18, 107, 1)
+            Color: =ColorValue("#7a8a99")
+            Fill: =Color.Transparent
+            Font: =Font.'Open Sans'
+            Height: =18
+            Size: =10
+            Text: ="En Ejecución"
+            Width: =RectMetrica2.Width - 28
+            X: =RectMetrica2.X + 14
+            Y: =RectMetrica2.Y + 12
+      - LblM1Valor_1:
+          Control: Label@2.5.1
+          Properties:
+            BorderColor: =RGBA(0, 18, 107, 1)
+            Color: =ColorValue("#1a3a5c")
+            Fill: =Color.Transparent
+            Font: =Font.'Open Sans'
+            FontWeight: =FontWeight.Bold
+            Height: =34
+            Size: =24
+            Text: =CountRows(Filter(Fases, 'Nombre de la Fase'.Value = "Ejecución"))
+            Width: =RectMetrica2.Width - 28
+            X: =RectMetrica2.X + 14
+            Y: =LblM1Label_1.Y + 20
+      - LblM1Trend_1:
+          Control: Label@2.5.1
+          Properties:
+            BorderColor: =RGBA(0, 18, 107, 1)
+            Color: =ColorValue("#3b6d11")
+            Fill: =Color.Transparent
+            Font: =Font.'Open Sans'
+            Height: =18
+            Size: =10
+            Text: ="↑ " & Text(CountRows(Filter(BancoProyectos, 'Fecha de priorización' >= DateAdd(Today(), -7, TimeUnit.Days)))) & " nuevas esta semana"
+            Width: =RectMetrica2.Width - 28
+            X: =RectMetrica2.X + 14
+            Y: =LblM1Valor_1.Y + 36
+      - RectMetrica3:
+          Control: Classic/Button@2.2.0
+          Properties:
+            BorderColor: =ColorValue("#dde3ea")
+            BorderThickness: =1
+            Color: =RGBA(255, 255, 255, 1)
+            DisabledBorderColor: =RGBA(166, 166, 166, 1)
+            Fill: =Color.White
+            Font: =Font.'Open Sans'
+            Height: =90
+            HoverBorderColor: =ColorFade(Self.BorderColor, 20%)
+            HoverColor: =RGBA(255, 255, 255, 1)
+            HoverFill: =Color.White
+            PressedBorderColor: =Self.Fill
+            PressedColor: =Self.Fill
+            PressedFill: =Color.White
+            Text: ="En priorización"
+            Width: =(Parent.Width - 80) / 3
+            X: =RectMetrica2.X + RectMetrica2.Width + 16
+            Y: =Container2_2.Y + Container2_2.Height + 12
+      - LblM1Label_2:
+          Control: Label@2.5.1
+          Properties:
+            BorderColor: =RGBA(0, 18, 107, 1)
+            Color: =ColorValue("#7a8a99")
+            Fill: =Color.Transparent
+            Font: =Font.'Open Sans'
+            Height: =18
+            Size: =10
+            Text: ="Sistema de Gestión de Proyectos"
+            Width: =RectMetrica3.Width - 28
+            X: =RectMetrica3.X + 14
+            Y: =RectMetrica3.Y + 12
+      - LblM1Valor_2:
+          Control: Label@2.5.1
+          Properties:
+            BorderColor: =RGBA(0, 18, 107, 1)
+            Color: =ColorValue("#1a3a5c")
+            Fill: =Color.Transparent
+            Font: =Font.'Open Sans'
+            FontWeight: =FontWeight.Bold
+            Height: =34
+            Size: =24
+            Text: =CountRows(SistemaGestionProyectos)
+            Width: =RectMetrica3.Width - 28
+            X: =RectMetrica3.X + 14
+            Y: =LblM1Label_2.Y + 20
+      - LblM1Trend_2:
+          Control: Label@2.5.1
+          Properties:
+            BorderColor: =RGBA(0, 18, 107, 1)
+            Color: =ColorValue("#3b6d11")
+            Fill: =Color.Transparent
+            Font: =Font.'Open Sans'
+            Height: =18
+            Size: =10
+            Text: ="↑ " & Text(CountRows(Filter(SistemaGestionProyectos, 'Fecha real entrega' >= DateAdd(Today(), -7, TimeUnit.Days)))) & " nuevas esta semana"
+            Width: =RectMetrica3.Width - 28
+            X: =RectMetrica3.X + 14
+            Y: =LblM1Valor_2.Y + 36
+      - GalleryProyectos_1:
+          Control: Gallery@2.15.0
+          Variant: Vertical
+          Properties:
+            BorderColor: =RGBA(0, 18, 107, 1)
+            Height: =283
+            Items: |-
+              =Filter(
+                  colProyectos,
+                  (varComuna = "Todas las comunas" || Comuna = varComuna) &&
+                  (varFase = "Todas las fases" || FaseCalculada = varFase) &&
+                  (varEstado = "Todos los estados" || EstadoCalculado = varEstado)
+              )
+            OnSelect: |-
+              =Set(varProyectoSeleccionado, ThisItem);
+              Set(varFaseActiva, ThisItem.FaseCalculada);
+              Set(varNumeroDeFase, ThisItem.FaseIDCalculada);
+              Navigate(Sgp_DetalleProyecto, ScreenTransition.Fade)
+            TemplateSize: =43
+            Width: =1136
+            Y: '=Container4_2.Y + Container4_2.Height '
+          Children:
+            - txtestado_1:
+                Control: Label@2.5.1
+                Properties:
+                  BorderColor: =RGBA(0, 18, 107, 1)
+                  Font: =Font.'Open Sans'
+                  Height: =43
+                  OnSelect: |-
+                    =Set(varProyectoSeleccionado, ThisItem);
+                    Set(varFaseActiva, ThisItem.FaseCalculada);
+                    Navigate(Sgp_DetalleProyecto, ScreenTransition.Fade)
+                  Size: =11.83
+                  Text: =ThisItem.EstadoCalculado
+                  Width: =headerestado_1.Width
+                  X: =headerestado_1.X
+            - txtfase_1:
+                Control: Label@2.5.1
+                Properties:
+                  BorderColor: =RGBA(0, 18, 107, 1)
+                  Font: =Font.'Open Sans'
+                  Height: =43
+                  OnSelect: |-
+                    =Set(varProyectoSeleccionado, ThisItem);
+                    Set(varFaseActiva, ThisItem.FaseCalculada);
+                    Navigate(Sgp_DetalleProyecto, ScreenTransition.Fade)
+                  Size: =11.83
+                  Text: =ThisItem.FaseCalculada
+                  Width: =headerfase_1.Width
+                  X: =headerfase_1.X
+            - txtcomunaproy_1:
+                Control: Label@2.5.1
+                Properties:
+                  BorderColor: =RGBA(0, 18, 107, 1)
+                  Font: =Font.'Open Sans'
+                  Height: =43
+                  OnSelect: |-
+                    =Set(varProyectoSeleccionado, ThisItem);
+                    Set(varFaseActiva, ThisItem.FaseCalculada);
+                    Navigate(Sgp_DetalleProyecto, ScreenTransition.Fade)
+                  Size: =11.83
+                  Text: =ThisItem.Comuna
+                  Width: =headercomuna_1.Width
+                  X: =headercomuna_1.X
+            - txtnomproyecto_1:
+                Control: Label@2.5.1
+                Properties:
+                  BorderColor: =RGBA(0, 18, 107, 1)
+                  Font: =Font.'Open Sans'
+                  Height: =43
+                  OnSelect: |-
+                    =Set(varProyectoSeleccionado, ThisItem);
+                    Set(varFaseActiva, ThisItem.FaseCalculada);
+                    Navigate(Sgp_DetalleProyecto, ScreenTransition.Fade)
+                  Size: =11.83
+                  Text: =ThisItem.NombreProyecto
+                  Width: =headernomproyecto_1.Width
+                  X: =headernomproyecto_1.X
+            - txtcontrato_1:
+                Control: Label@2.5.1
+                Properties:
+                  BorderColor: =RGBA(0, 18, 107, 1)
+                  Font: =Font.'Open Sans'
+                  Height: =43
+                  OnSelect: |-
+                    =Set(
+                        varProyectoSeleccionado,
+                        LookUp(colProyectos, NumeroRadicado = ThisItem.NumeroRadicado)
+                    );
+                    Set(varFaseActiva, ThisItem.FaseCalculada);
+                    Navigate(Sgp_DetalleProyecto, ScreenTransition.Fade)
+                  Size: =11.83
+                  Text: =ThisItem.NumeroContrato
+                  Width: =headercontrato_1.Width
+                  X: =headercontrato_1.X
+      - Container4_2:
+          Control: GroupContainer@1.5.0
+          Variant: AutoLayout
+          Properties:
+            BorderColor: =RGBA(226,226,222,1)
+            BorderThickness: =1
+            Height: =34
+            LayoutAlignItems: =LayoutAlignItems.Center
+            LayoutDirection: =LayoutDirection.Horizontal
+            PaddingBottom: =8
+            PaddingLeft: =16
+            PaddingRight: =8
+            PaddingTop: =8
+            Width: =1136
+            Y: '=Container3_1.Y + Container3_1.Height '
+          Children:
+            - headercontrato_1:
+                Control: Classic/Button@2.2.0
+                Properties:
+                  BorderColor: =ColorFade(Self.Fill, -15%)
+                  Color: =RGBA(255, 255, 255, 1)
+                  DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                  Fill: =RGBA(56, 96, 178, 1)
+                  Font: =Font.'Open Sans'
+                  Height: =32
+                  HoverBorderColor: =ColorFade(Self.BorderColor, 20%)
+                  HoverColor: =RGBA(255, 255, 255, 1)
+                  HoverFill: =ColorFade(RGBA(56, 96, 178, 1), -20%)
+                  LayoutMinHeight: =16
+                  LayoutMinWidth: =16
+                  PressedBorderColor: =Self.Fill
+                  PressedColor: =Self.Fill
+                  PressedFill: =Self.Color
+                  Size: =11.83
+                  Text: ="CONTRATO"
+                  Width: =120
+            - headernomproyecto_1:
+                Control: Classic/Button@2.2.0
+                Properties:
+                  BorderColor: =ColorFade(Self.Fill, -15%)
+                  Color: =RGBA(255, 255, 255, 1)
+                  DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                  Fill: =RGBA(56, 96, 178, 1)
+                  Font: =Font.'Open Sans'
+                  Height: =32
+                  HoverBorderColor: =ColorFade(Self.BorderColor, 20%)
+                  HoverColor: =RGBA(255, 255, 255, 1)
+                  HoverFill: =ColorFade(RGBA(56, 96, 178, 1), -20%)
+                  LayoutMinHeight: =16
+                  LayoutMinWidth: =16
+                  PressedBorderColor: =Self.Fill
+                  PressedColor: =Self.Fill
+                  PressedFill: =Self.Color
+                  Size: =11.83
+                  Text: ="NOMBRE DEL PROYECTO"
+                  Width: =450
+                  X: =headercontrato_1.X+headercontrato_1.Width
+            - headercomuna_1:
+                Control: Classic/Button@2.2.0
+                Properties:
+                  BorderColor: =ColorFade(Self.Fill, -15%)
+                  Color: =RGBA(255, 255, 255, 1)
+                  DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                  Fill: =RGBA(56, 96, 178, 1)
+                  Font: =Font.'Open Sans'
+                  Height: =32
+                  HoverBorderColor: =ColorFade(Self.BorderColor, 20%)
+                  HoverColor: =RGBA(255, 255, 255, 1)
+                  HoverFill: =ColorFade(RGBA(56, 96, 178, 1), -20%)
+                  LayoutMinHeight: =16
+                  LayoutMinWidth: =16
+                  PressedBorderColor: =Self.Fill
+                  PressedColor: =Self.Fill
+                  PressedFill: =Self.Color
+                  Size: =11.83
+                  Text: ="COMUNA-CORREGIMIENTO"
+                  Width: =230
+                  X: =headernomproyecto_1.X+headernomproyecto_1.Width
+            - headerfase_1:
+                Control: Classic/Button@2.2.0
+                Properties:
+                  BorderColor: =ColorFade(Self.Fill, -15%)
+                  Color: =RGBA(255, 255, 255, 1)
+                  DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                  Fill: =RGBA(56, 96, 178, 1)
+                  Font: =Font.'Open Sans'
+                  Height: =32
+                  HoverBorderColor: =ColorFade(Self.BorderColor, 20%)
+                  HoverColor: =RGBA(255, 255, 255, 1)
+                  HoverFill: =ColorFade(RGBA(56, 96, 178, 1), -20%)
+                  LayoutMinHeight: =16
+                  LayoutMinWidth: =16
+                  PressedBorderColor: =Self.Fill
+                  PressedColor: =Self.Fill
+                  PressedFill: =Self.Color
+                  Size: =11.83
+                  Text: ="FASE"
+                  Width: =100
+                  X: =headercomuna_1.X+headercomuna_1.Width
+            - headeravance_1:
+                Control: Classic/Button@2.2.0
+                Properties:
+                  BorderColor: =ColorFade(Self.Fill, -15%)
+                  Color: =RGBA(255, 255, 255, 1)
+                  DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                  Fill: =RGBA(56, 96, 178, 1)
+                  Font: =Font.'Open Sans'
+                  Height: =32
+                  HoverBorderColor: =ColorFade(Self.BorderColor, 20%)
+                  HoverColor: =RGBA(255, 255, 255, 1)
+                  HoverFill: =ColorFade(RGBA(56, 96, 178, 1), -20%)
+                  LayoutMinHeight: =16
+                  LayoutMinWidth: =16
+                  PressedBorderColor: =Self.Fill
+                  PressedColor: =Self.Fill
+                  PressedFill: =Self.Color
+                  Size: =11.83
+                  Text: ="AVANCE"
+                  Width: =120
+                  X: =headerfase_1.X+headerfase_1.Width
+            - headerestado_1:
+                Control: Classic/Button@2.2.0
+                Properties:
+                  BorderColor: =ColorFade(Self.Fill, -15%)
+                  Color: =RGBA(255, 255, 255, 1)
+                  DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                  Fill: =RGBA(56, 96, 178, 1)
+                  Font: =Font.'Open Sans'
+                  Height: =32
+                  HoverBorderColor: =ColorFade(Self.BorderColor, 20%)
+                  HoverColor: =RGBA(255, 255, 255, 1)
+                  HoverFill: =ColorFade(RGBA(56, 96, 178, 1), -20%)
+                  LayoutMinHeight: =16
+                  LayoutMinWidth: =16
+                  PressedBorderColor: =Self.Fill
+                  PressedColor: =Self.Fill
+                  PressedFill: =Self.Color
+                  Size: =11.83
+                  Text: ="ESTADO"
+                  Width: =120
+                  X: =headerfase_1.X+headerfase_1.Width
+      - Container3_1:
+          Control: GroupContainer@1.5.0
+          Variant: AutoLayout
+          Properties:
+            Height: =53
+            LayoutAlignItems: =LayoutAlignItems.Center
+            LayoutDirection: =LayoutDirection.Horizontal
+            PaddingBottom: =8
+            PaddingLeft: =16
+            PaddingRight: =16
+            PaddingTop: =8
+            Width: =Parent.Width
+            Y: =Container2_2.Y + Container2_2.Height + 110
+          Children:
+            - Label3_1:
+                Control: Label@2.5.1
+                Properties:
+                  AlignInContainer: =AlignInContainer.End
+                  AutoHeight: =true
+                  BorderColor: =RGBA(0, 18, 107, 1)
+                  Font: =Font.'Open Sans'
+                  FontWeight: =FontWeight.Bold
+                  Height: =39.44
+                  LayoutMinHeight: =16
+                  LayoutMinWidth: =16
+                  Size: =11.83
+                  Text: ="Lista de radicación de proyectos"
+            - DespComuna_1:
+                Control: Classic/DropDown@2.3.1
+                Properties:
+                  AlignInContainer: =AlignInContainer.Stretch
+                  BorderColor: =RGBA(0, 18, 107, 1)
+                  ChevronBackground: =RGBA(56, 96, 178, 1)
+                  ChevronFill: =RGBA(255, 255, 255, 1)
+                  ChevronHoverBackground: =ColorFade(RGBA(56, 96, 178, 1), -20%)
+                  ChevronHoverFill: =RGBA(255, 255, 255, 1)
+                  FillPortions: =1
+                  Font: =Font.'Open Sans'
+                  Height: =39
+                  HoverFill: =RGBA(186, 202, 226, 1)
+                  Items: =["Todas las comunas", "1 - Popular", "2 - Santa Cruz", "3 - Manrique", "4 - Aranjuez", "5 - Castilla", "6 - Doce de Octubre", "7 - Robledo", "8 - Villa Hermosa", "9 - Buenos Aires", "10 - La Candelaria", "11 - Laureles-Estadio", "12 - La América", "13 - San Javier", "14 - El Poblado", "15 - Guayabal", "16 - Belén", "50 - Palmitas", "60 - San Cristóbal", "70 - Altavista", "80 - San Antonio de Prado", "90 - Santa Elena"]
+                  Items.Value: =Value
+                  LayoutMinHeight: =16
+                  LayoutMinWidth: =16
+                  OnChange: =Set(varComuna, DespComuna_1.Selected.Value)
+                  PressedColor: =RGBA(255, 255, 255, 1)
+                  PressedFill: =RGBA(0, 18, 107, 1)
+                  SelectionColor: =RGBA(255, 255, 255, 1)
+                  SelectionFill: =RGBA(56, 96, 178, 1)
+                  Size: =11.83
+                  Width: =250
+                  X: =150
+            - DespFases:
+                Control: Classic/DropDown@2.3.1
+                Properties:
+                  AlignInContainer: =AlignInContainer.Stretch
+                  BorderColor: =RGBA(0, 18, 107, 1)
+                  ChevronBackground: =RGBA(56, 96, 178, 1)
+                  ChevronFill: =RGBA(255, 255, 255, 1)
+                  ChevronHoverBackground: =ColorFade(RGBA(56, 96, 178, 1), -20%)
+                  ChevronHoverFill: =RGBA(255, 255, 255, 1)
+                  FillPortions: =1
+                  Font: =Font.'Open Sans'
+                  Height: =39
+                  HoverFill: =RGBA(186, 202, 226, 1)
+                  Items: =["Todas las fases", "Planeación", "Diseño", "Contratación", "Ejecución", "Cierre y Liquidación"]
+                  Items.Value: =Value
+                  LayoutMinHeight: =16
+                  LayoutMinWidth: =16
+                  OnChange: =Set(varFase, DespFases.Selected.Value)
+                  PressedColor: =RGBA(255, 255, 255, 1)
+                  PressedFill: =RGBA(0, 18, 107, 1)
+                  SelectionColor: =RGBA(255, 255, 255, 1)
+                  SelectionFill: =RGBA(56, 96, 178, 1)
+                  Size: =11.83
+                  Width: =200
+                  X: =776
+            - DespEstados_1:
+                Control: Classic/DropDown@2.3.1
+                Properties:
+                  AlignInContainer: =AlignInContainer.Stretch
+                  BorderColor: =RGBA(0, 18, 107, 1)
+                  ChevronBackground: =RGBA(56, 96, 178, 1)
+                  ChevronFill: =RGBA(255, 255, 255, 1)
+                  ChevronHoverBackground: =ColorFade(RGBA(56, 96, 178, 1), -20%)
+                  ChevronHoverFill: =RGBA(255, 255, 255, 1)
+                  FillPortions: =1
+                  Font: =Font.'Open Sans'
+                  Height: =39.44
+                  HoverFill: =RGBA(186, 202, 226, 1)
+                  Items: =["Todos los estados", "En curso", "En alerta", "Pausado", "Cerrado", "Completada", "Pendiente"]
+                  Items.Value: =Value
+                  LayoutMinHeight: =16
+                  LayoutMinWidth: =16
+                  OnChange: =Set(varEstado, DespEstados_1.Selected.Value)
+                  PressedColor: =RGBA(255, 255, 255, 1)
+                  PressedFill: =RGBA(0, 18, 107, 1)
+                  SelectionColor: =RGBA(255, 255, 255, 1)
+                  SelectionFill: =RGBA(56, 96, 178, 1)
+                  Size: =11.83
+                  Width: =200
+      - Container2_2:
+          Control: GroupContainer@1.5.0
+          Variant: AutoLayout
+          Properties:
+            BorderColor: =RGBA(226,226,222,1)
+            Fill: =RGBA(255,255,255,1)
+            Height: =52
+            LayoutAlignItems: =LayoutAlignItems.Center
+            LayoutDirection: =LayoutDirection.Vertical
+            LayoutJustifyContent: =LayoutJustifyContent.Center
+            PaddingBottom: =8
+            PaddingLeft: =20
+            PaddingRight: =24
+            Width: =Parent.Width
+            Y: =Comp_Encabezado_16.Height+Container5_8.Height
+          Children:
+            - Label1_2:
+                Control: Label@2.5.1
+                Properties:
+                  BorderColor: =RGBA(0, 18, 107, 1)
+                  Color: =RGBA(26,26,24,1)
+                  FillPortions: =1
+                  Font: =Font.'Open Sans'
+                  FontWeight: =FontWeight.Bold
+                  Height: =24
+                  LayoutMinHeight: =16
+                  LayoutMinWidth: =16
+                  Size: =15
+                  Text: ="Radicación proyectos"
+                  VerticalAlign: =VerticalAlign.Bottom
+                  Width: =Parent.Width
+            - Label2_2:
+                Control: Label@2.5.1
+                Properties:
+                  BorderColor: =RGBA(0, 18, 107, 1)
+                  Color: =RGBA(90,90,86,1)
+                  Font: =Font.'Open Sans'
+                  Height: =18
+                  LayoutMinHeight: =16
+                  LayoutMinWidth: =16
+                  Size: =11
+                  Text: ="Radicación y seguimiento de proyectos"
+                  Width: =Parent.Width

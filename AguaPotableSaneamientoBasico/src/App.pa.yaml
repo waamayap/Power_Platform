@@ -1,0 +1,42 @@
+# ************************************************************************************************
+# Warning: YAML source code for Canvas Apps should only be used to review changes made within Power Apps Studio and for minor edits (Preview).
+# Use the maker portal to create and edit your Power Apps.
+# 
+# The schema file for Canvas Apps is available at https://go.microsoft.com/fwlink/?linkid=2304907
+# 
+# For more information, visit https://go.microsoft.com/fwlink/?linkid=2292623
+# ************************************************************************************************
+App:
+  Properties:
+    OnStart: |+
+      =Set(varDropdownModulo, false);
+      ClearCollect(colFases, Fases);
+      ClearCollect(colSGP, SistemaGestionProyectos);
+      ClearCollect(
+          colProyectos,
+          ForAll(
+              RepositorioProyectos,
+              With(
+                  {NRE: 'Numero radicado entrada'},
+                  {
+                      NumeroRadicado: NRE,
+                      NombreProyecto: 'Nombre del proyecto',
+                      NumeroContrato: 'Número de contrato',
+                      Comuna: 'Comuna - Corregimiento'.Value,
+                      FaseCalculada: LookUp(
+                          colFases,
+                          FaseID = LookUp(colSGP, 'Numero radicado entrada' = NRE).FaseID
+                      ).'Nombre de la Fase'.Value,
+                      EstadoCalculado: LookUp(
+                          colFases,
+                          'Numero radicado entrada' = NRE &&
+                          FaseID = LookUp(colSGP, 'Numero radicado entrada' = NRE).FaseID
+                      ).Estado.Value
+                  }
+              )
+          )
+      );
+      ClearCollect(colComunasFiltro, [{Opcion: "Todas las comunas"}]);
+      ClearCollect(colFasesFiltro, [{Opcion: "Todas las fases"}]);
+      ClearCollect(colEstadosFiltro, [{Opcion: "Todos los estados"}])
+    Theme: =PowerAppsTheme

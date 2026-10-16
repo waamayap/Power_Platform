@@ -1,0 +1,16 @@
+# Paquetes exportados de Power Platform (contienen URLs, IDs del entorno y correo del creador)
+*.zip
+*.msapp
+manifest.json
+*.sarif
+_EditorState.pa.yaml
+
+# Archivos desempaquetados del .msapp que no se versionan
+**/References/
+**/Resources/
+**/Controls/
+**/Assets/
+Header.json
+Properties.json
+ComponentsMetadata.json
+*identity.json
