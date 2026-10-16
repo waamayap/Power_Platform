@@ -23,11 +23,19 @@ Componente reutilizable: `Comp_Encabezado` (encabezado con usuario, iniciales y 
 - **Conectores:** SharePoint y Usuarios de Office 365 (búsqueda de profesionales).
 - **Formato:** teléfono, 1136 × 640.
 
+## Documentación
+
+| Fase | Contenido |
+|---|---|
+| [Fase 1](docs/fase1/README.md) | Documentación técnica, manual de usuario, modelo de datos y 9 flujos de Power Automate (vencimientos, notificaciones, cartas de respuesta, sincronización Solicitudes → Priorización → Proyectos, código y fases de proyecto) |
+
 ## Estructura
 
 ```
 src/            Código fuente de las pantallas en formato Power Fx YAML (.pa.yaml)
 src/Components/ Componentes de lienzo
+docs/fase1/     Documentación de la Fase 1 (flujos, Power Apps, modelo de datos)
+img/            Capturas de la aplicación
 esquema-listas.md
 ```
 
